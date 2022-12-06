@@ -1,0 +1,100 @@
+{
+  "project_info": {
+    "project_number": "503300254385",
+    "project_id": "docexalapp",
+    "storage_bucket": "docexalapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:503300254385:android:99b5dacf9f6a852fbc1090",
+        "android_client_info": {
+          "package_name": "com.docexalapp.doctor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "503300254385-icpbisjoi38rujpart0jb210r99a788g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.docexalapp.doctor",
+            "certificate_hash": "0d51c4c6b383a1c61fc89b6ff4b79fed6631cc3d"
+          }
+        },
+        {
+          "client_id": "503300254385-jbir7t6slet414cshjmrnu7iu49lle09.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.docexalapp.doctor",
+            "certificate_hash": "a293df7505166fc2a1e11b040aceae0fd2392880"
+          }
+        },
+        {
+          "client_id": "503300254385-vc34lm36he1b757j2thcro922q8fk3ho.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB8CC3cb7jWjQw3DRYZQtymnHSQRkWegnw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "503300254385-vc34lm36he1b757j2thcro922q8fk3ho.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:503300254385:android:e4151f2a6df83af3bc1090",
+        "android_client_info": {
+          "package_name": "com.docexalapp.patient"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "503300254385-1k0j5rvf23708sev38qkh6jkddei0ojh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.docexalapp.patient",
+            "certificate_hash": "a293df7505166fc2a1e11b040aceae0fd2392880"
+          }
+        },
+        {
+          "client_id": "503300254385-tvtob5q0ojj9qu63piaj769b80fht1q6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.docexalapp.patient",
+            "certificate_hash": "0d51c4c6b383a1c61fc89b6ff4b79fed6631cc3d"
+          }
+        },
+        {
+          "client_id": "503300254385-vc34lm36he1b757j2thcro922q8fk3ho.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB8CC3cb7jWjQw3DRYZQtymnHSQRkWegnw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "503300254385-vc34lm36he1b757j2thcro922q8fk3ho.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
