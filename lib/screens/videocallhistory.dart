@@ -216,7 +216,7 @@ class _VideoCallHistoryState extends State<VideoCallHistory> {
                     );
             } else {
               return Center(
-                child: CircularProgressIndicator(),
+                child: CircularProgressIndicator(color: loginButton),
               );
             }
         },

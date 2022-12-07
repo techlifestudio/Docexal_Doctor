@@ -25,6 +25,8 @@ import 'package:intl/intl.dart';
 import 'package:dropdown_plus/dropdown_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../chat/constants/colors.dart';
+
 class PatientInformationScreen extends StatefulWidget {
    final  int? id;
 
@@ -204,7 +206,9 @@ class _PatientInformationScreenState extends State<PatientInformationScreen> wit
                                         backgroundImage: imageProvider,
                                       ),
                                     ),
-                                    placeholder: (context, url) => CircularProgressIndicator(),
+                                    placeholder: (context, url) => CircularProgressIndicator(
+                                      color: ColorConstants.themeColor,
+                                    ),
                                     errorWidget: (context, url, error) => Image.asset("assets/images/no_image.jpg"),
                                   ),
                                 ),
@@ -870,7 +874,9 @@ class _PatientInformationScreenState extends State<PatientInformationScreen> wit
                 ),
               );
             } else {
-              return Center(child: CircularProgressIndicator());
+              return Center(child: CircularProgressIndicator(
+                color: ColorConstants.themeColor,
+              ));
             }
           }),
     );

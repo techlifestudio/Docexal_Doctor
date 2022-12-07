@@ -379,7 +379,7 @@ class _SubscriptionHistoryState extends State<SubscriptionHistory> {
                       );
               } else {
                 return Center(
-                  child: CircularProgressIndicator(),
+                  child: CircularProgressIndicator(color: loginButton),
                 );
               }
             }),

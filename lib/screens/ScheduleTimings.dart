@@ -99,7 +99,7 @@ class _ScheduleTimingsState extends State<ScheduleTimings> {
             future: workinghours,
             builder: (context, snapshot) {
               if (snapshot.connectionState != ConnectionState.done) {
-                  return Center(child: CircularProgressIndicator());
+                  return Center(child: CircularProgressIndicator(color: loginButton));
               }
               else {
                 return Container(

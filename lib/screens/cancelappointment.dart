@@ -18,6 +18,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:doctro/model/hospital.dart';
 
+import '../chat/constants/colors.dart';
+
 class CancelAppointmentScreen extends StatefulWidget {
   @override
   _CancelAppointmentScreen createState() => _CancelAppointmentScreen();
@@ -148,7 +150,9 @@ class _CancelAppointmentScreen extends State<CancelAppointmentScreen> {
                                   backgroundImage: imageProvider,
                                 ),
                               ),
-                              placeholder: (context, url) => CircularProgressIndicator(),
+                              placeholder: (context, url) => CircularProgressIndicator(
+                                color: ColorConstants.themeColor,
+                              ),
                               errorWidget: (context, url, error) => Image.asset("assets/images/no_image.jpg"),
                             ),
                           ),
@@ -613,7 +617,9 @@ class _CancelAppointmentScreen extends State<CancelAppointmentScreen> {
                     ),
                   );
                 } else {
-                  return Center(child: CircularProgressIndicator());
+                  return Center(child: CircularProgressIndicator(
+                    color: ColorConstants.themeColor,
+                  ));
                 }
               }),
         ),

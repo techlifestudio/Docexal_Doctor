@@ -18,6 +18,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 
+import '../chat/constants/colors.dart';
+
 class AppointmentHistoryScreen extends StatefulWidget {
   @override
   _AppointmentHistoryScreen createState() => _AppointmentHistoryScreen();
@@ -187,7 +189,9 @@ class _AppointmentHistoryScreen extends State<AppointmentHistoryScreen> with Tic
                                       backgroundImage: imageProvider,
                                     ),
                                   ),
-                                  placeholder: (context, url) => CircularProgressIndicator(),
+                                  placeholder: (context, url) => CircularProgressIndicator(
+                                    color: ColorConstants.themeColor,
+                                  ),
                                   errorWidget: (context, url, error) => Image.asset("assets/images/no_image.jpg"),
                                 ),
                               ),
@@ -1105,7 +1109,9 @@ class _AppointmentHistoryScreen extends State<AppointmentHistoryScreen> with Tic
                             ),
                           );
                         } else {
-                          return Center(child: CircularProgressIndicator());
+                          return Center(child: CircularProgressIndicator(
+                            color: ColorConstants.themeColor,
+                          ));
                         }
                       }),
                 ),

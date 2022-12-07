@@ -408,7 +408,7 @@ class _ViewAllAppointmentState extends State<ViewAllAppointment> {
                   );
                 } else {
                   return Center(
-                    child: CircularProgressIndicator(),
+                    child: CircularProgressIndicator(color: loginButton),
                   );
                 }
               }),

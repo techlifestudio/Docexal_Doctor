@@ -228,7 +228,7 @@ class _VideoCallState extends State<VideoCall> {
                                         ? RtcLocalView.SurfaceView(
                                             renderMode: VideoRenderMode.FILL,
                                           )
-                                        : const CircularProgressIndicator(),
+                                        : const CircularProgressIndicator(color: loginButton),
                                   ),
                                 );
                               },

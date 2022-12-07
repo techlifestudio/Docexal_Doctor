@@ -167,7 +167,7 @@ class _ViewAllAppointmentState extends State<ViewAllNotification> {
               );
             }
             else{
-              return Center(child: CircularProgressIndicator(),);
+              return Center(child: CircularProgressIndicator(color: loginButton),);
             }
           },
         ));

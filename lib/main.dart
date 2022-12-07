@@ -25,6 +25,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'VideoCall/overlay_handler.dart';
+import 'chat/constants/colors.dart';
 import 'chat/pages/home_page.dart';
 import 'chat/providers/auth_provider.dart';
 import 'chat/providers/chat_provider.dart';
@@ -260,7 +261,9 @@ class _MyAppState extends State<MyApp> {
     if (_locale == null) {
       return Container(
         child: Center(
-          child: CircularProgressIndicator(),
+          child: CircularProgressIndicator(
+            color: ColorConstants.themeColor,
+          ),
         ),
       );
     }

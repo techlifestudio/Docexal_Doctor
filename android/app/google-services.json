@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "503300254385",
+    "firebase_url": "https://docexalapp-default-rtdb.firebaseio.com",
     "project_id": "docexalapp",
     "storage_bucket": "docexalapp.appspot.com"
   },

@@ -140,7 +140,7 @@ class _RateAndReviewScreenState extends State<RateAndReviewScreen> {
                               backgroundImage: imageProvider,
                             ),
                           ),
-                          placeholder: (context, url) => CircularProgressIndicator(),
+                          placeholder: (context, url) => CircularProgressIndicator(color: loginButton),
                           errorWidget: (context, url, error) => Image.asset("assets/images/no_image.jpg"),
                         ),
                       ),
@@ -554,7 +554,7 @@ class _RateAndReviewScreenState extends State<RateAndReviewScreen> {
                 );
               } else {
                 return Center(
-                  child: CircularProgressIndicator(),
+                  child: CircularProgressIndicator(color: loginButton),
                 );
               }
             }),

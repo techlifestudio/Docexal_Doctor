@@ -29,6 +29,8 @@ import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:doctro/chat/constants/firestore_constants.dart';
 import 'package:provider/provider.dart';
 
+import '../chat/constants/colors.dart';
+
 class LoginHome extends StatefulWidget {
   final String? chat;
 
@@ -224,7 +226,9 @@ class _LoginHomeState extends State<LoginHome> {
                                 backgroundImage: imageProvider,
                               ),
                             ),
-                            placeholder: (context, url) => CircularProgressIndicator(),
+                            placeholder: (context, url) => CircularProgressIndicator(
+                              color: ColorConstants.themeColor,
+                            ),
                             errorWidget: (context, url, error) => Image.asset("assets/images/no_image.jpg"),
                           ),
                         ),
@@ -733,7 +737,9 @@ class _LoginHomeState extends State<LoginHome> {
                     );
                   } else {
                     return Center(
-                      child: CircularProgressIndicator(),
+                      child: CircularProgressIndicator(
+                        color: ColorConstants.themeColor,
+                      ),
                     );
                   }
                 }),

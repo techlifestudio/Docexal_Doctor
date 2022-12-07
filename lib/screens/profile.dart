@@ -984,7 +984,9 @@ class _ProfileScreen extends State<ProfileScreen> {
                                                   builder: (context, snapshot) {
                                                     if (snapshot.connectionState != ConnectionState.done) {
                                                       return Container(
-                                                        child: CircularProgressIndicator(),
+                                                        child: CircularProgressIndicator(
+                                                            color: loginButton
+                                                        ),
                                                       );
                                                     } else {
                                                       categoryreq.addAll(snapshot.data!.data!.categoriesData!);
@@ -1046,7 +1048,7 @@ class _ProfileScreen extends State<ProfileScreen> {
                                                     builder: (context, snapshot) {
                                                       if (snapshot.connectionState != ConnectionState.done) {
                                                         return Center(
-                                                          child: CircularProgressIndicator(),
+                                                          child: CircularProgressIndicator(color: loginButton),
                                                         );
                                                       } else {
                                                         categoryreq.clear();
@@ -1382,7 +1384,7 @@ class _ProfileScreen extends State<ProfileScreen> {
                 ),
               );
             } else {
-              return Center(child: CircularProgressIndicator());
+              return Center(child: CircularProgressIndicator(color: loginButton));
             }
           }),
       bottomNavigationBar: Container(

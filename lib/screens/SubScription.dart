@@ -304,7 +304,7 @@ class _SubScriptionState extends State<SubScription> {
                 );
               } else {
                 return Center(
-                  child: CircularProgressIndicator(),
+                  child: CircularProgressIndicator(color: loginButton),
                 );
               }
             }));

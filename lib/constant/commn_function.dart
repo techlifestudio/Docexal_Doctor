@@ -18,7 +18,7 @@ class CommonFunction{
             child: new Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                new CircularProgressIndicator(),
+                new CircularProgressIndicator(color: loginButton),
                 SizedBox(width : 20),
                 new Text("Please Wait"),
               ],

@@ -16,6 +16,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:doctro/model/payment.dart';
 
+import '../chat/constants/colors.dart';
+
 class PaymentScreen extends StatefulWidget {
   @override
   _PaymentScreen createState() => _PaymentScreen();
@@ -150,7 +152,9 @@ class _PaymentScreen extends State<PaymentScreen> {
                                   backgroundImage: imageProvider,
                                 ),
                               ),
-                              placeholder: (context, url) => CircularProgressIndicator(),
+                              placeholder: (context, url) => CircularProgressIndicator(
+                                color: ColorConstants.themeColor,
+                              ),
                               errorWidget: (context, url, error) => Image.asset("assets/images/no_image.jpg"),
                             ),
                           ),
@@ -568,7 +572,9 @@ class _PaymentScreen extends State<PaymentScreen> {
                   );
                 } else {
                   return Center(
-                    child: CircularProgressIndicator(),
+                    child: CircularProgressIndicator(
+                      color: ColorConstants.themeColor,
+                    ),
                   );
                 }
               }),
