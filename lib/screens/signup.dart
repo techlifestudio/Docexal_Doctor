@@ -212,7 +212,7 @@ class _CreateAccountState extends State<CreateAccount> {
                                         ),
                                         controller: _phoneCode,
                                         decoration: InputDecoration(
-                                          hintText: '+91',
+                                          hintText: 'Code',
                                           border: InputBorder.none,
                                           hintStyle: TextStyle(fontSize: width * 0.04,
                                               color: hintColor,
