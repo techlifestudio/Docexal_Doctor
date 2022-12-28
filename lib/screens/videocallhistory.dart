@@ -18,7 +18,6 @@ class VideoCallHistory extends StatefulWidget {
 }
 
 class _VideoCallHistoryState extends State<VideoCallHistory> {
-
   bool loading = false;
   List<Data> callHistory = [];
   String duration = "";
@@ -32,7 +31,6 @@ class _VideoCallHistoryState extends State<VideoCallHistory> {
 
   @override
   Widget build(BuildContext context) {
-
     double width;
     double height;
 
@@ -55,27 +53,30 @@ class _VideoCallHistoryState extends State<VideoCallHistory> {
         backgroundColor: colorWhite,
         title: Text(
           getTranslated(context, drawer_callHistory).toString(),
-          style: TextStyle(fontSize: 18, color: hintColor, fontWeight: FontWeight.bold),
+          style: TextStyle(
+              fontSize: 18, color: hintColor, fontWeight: FontWeight.bold),
         ),
       ),
-      body:
-          RefreshIndicator(
-            onRefresh: callApiShowVideoCallHistory,
-            child: FutureBuilder(
-        future: loader,
-        builder: (context, snapshot) {
+      body: RefreshIndicator(
+        onRefresh: callApiShowVideoCallHistory,
+        child: FutureBuilder(
+          future: loader,
+          builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
               return callHistory.length != 0
                   ? ListView.builder(
                       itemCount: callHistory.length,
                       scrollDirection: Axis.vertical,
                       itemBuilder: (context, index) {
-
-                        final now = Duration(seconds: int.parse(callHistory[index].duration!));
+                        final now = Duration(
+                            seconds: int.parse(callHistory[index].duration!));
                         String _printDuration(Duration duration) {
-                          String twoDigits(int n) => n.toString().padLeft(2, "0");
-                          String twoDigitMinutes = twoDigits(duration.inMinutes.remainder(60));
-                          String twoDigitSeconds = twoDigits(duration.inSeconds.remainder(60));
+                          String twoDigits(int n) =>
+                              n.toString().padLeft(2, "0");
+                          String twoDigitMinutes =
+                              twoDigits(duration.inMinutes.remainder(60));
+                          String twoDigitSeconds =
+                              twoDigits(duration.inSeconds.remainder(60));
                           return "${twoDigits(duration.inHours)}:$twoDigitMinutes:$twoDigitSeconds";
                         }
 
@@ -92,7 +93,8 @@ class _VideoCallHistoryState extends State<VideoCallHistory> {
                         secondType = parts[2].trim();
 
                         if (hourPart != "00" && minuteType != "00") {
-                          duration = "${hourPart + "h " + minuteType + "m " + secondType + "s "}";
+                          duration =
+                              "${hourPart + "h " + minuteType + "m " + secondType + "s "}";
                           print("Time3 $duration");
                         } else if (hourPart == "00" && minuteType != "00") {
                           duration = "${minuteType + "m " + secondType + "s "}";
@@ -105,31 +107,46 @@ class _VideoCallHistoryState extends State<VideoCallHistory> {
                         return Column(
                           children: [
                             Container(
-                              margin: EdgeInsets.symmetric(horizontal: width * 0.01, vertical: width * 0.02),
+                              margin: EdgeInsets.symmetric(
+                                  horizontal: width * 0.01,
+                                  vertical: width * 0.02),
                               child: Row(
                                 children: [
                                   Container(
                                     width: width * 0.15,
                                     alignment: AlignmentDirectional.center,
-                                    margin: EdgeInsets.symmetric(horizontal: width * 0.01, vertical: width * 0.02),
+                                    margin: EdgeInsets.symmetric(
+                                        horizontal: width * 0.01,
+                                        vertical: width * 0.02),
                                     child: Column(
                                       children: [
                                         SizedBox(
                                           width: width * 0.15,
                                           height: height * 0.065,
                                           child: ClipRRect(
-                                            borderRadius: BorderRadius.circular(10),
+                                            borderRadius:
+                                                BorderRadius.circular(10),
                                             child: CachedNetworkImage(
                                               alignment: Alignment.center,
-                                              imageUrl: callHistory[index].user!.fullImage!,
+                                              imageUrl: callHistory[index]
+                                                  .user!
+                                                  .fullImage!,
                                               fit: BoxFit.fitHeight,
-                                              placeholder: (context, url) =>  Transform.scale(
+                                              placeholder: (context, url) =>
+                                                  Transform.scale(
                                                 scale: 0.4,
-                                                child: const CircularProgressIndicator(color: loginButton,),
+                                                child:
+                                                    const CircularProgressIndicator(
+                                                  color: loginButton,
+                                                ),
                                               ),
-                                              errorWidget: (context, url, error) => ClipRRect(
-                                                borderRadius: BorderRadius.circular(15),
-                                                child: Image.asset("assets/images/no_image.jpg"),
+                                              errorWidget:
+                                                  (context, url, error) =>
+                                                      ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(15),
+                                                child: Image.asset(
+                                                    "assets/images/no_image.jpg"),
                                               ),
                                               width: width * 0.15,
                                               height: height * 0.065,
@@ -142,20 +159,32 @@ class _VideoCallHistoryState extends State<VideoCallHistory> {
                                   SizedBox(
                                     width: width * 0.8,
                                     child: Container(
-                                      margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                                      margin: const EdgeInsets.symmetric(
+                                          horizontal: 10, vertical: 5),
                                       child: Column(
                                         children: [
                                           Container(
-                                            margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 5),
+                                            margin: const EdgeInsets.symmetric(
+                                                horizontal: 0, vertical: 5),
                                             child: Row(
-                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
                                               children: [
                                                 Text(
-                                                  callHistory[index].user!.name!,
-                                                  style: TextStyle(fontSize: width * 0.04, color: hintColor, fontWeight: FontWeight.bold),
+                                                  callHistory[index]
+                                                      .user!
+                                                      .name!,
+                                                  style: TextStyle(
+                                                      fontSize: width * 0.04,
+                                                      color: hintColor,
+                                                      fontWeight:
+                                                          FontWeight.bold),
                                                 ),
                                                 Text(
-                                                  callHistory[index].startTime!.toLowerCase(),
+                                                  callHistory[index]
+                                                      .startTime!
+                                                      .toLowerCase(),
                                                   style: TextStyle(
                                                     fontSize: width * 0.03,
                                                     color: hintColor,
@@ -165,9 +194,12 @@ class _VideoCallHistoryState extends State<VideoCallHistory> {
                                             ),
                                           ),
                                           Container(
-                                            alignment: AlignmentDirectional.topStart,
+                                            alignment:
+                                                AlignmentDirectional.topStart,
                                             child: Row(
-                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
                                               children: [
                                                 Text(
                                                   "$duration",
@@ -177,7 +209,10 @@ class _VideoCallHistoryState extends State<VideoCallHistory> {
                                                   ),
                                                 ),
                                                 Text(
-                                                  DateUtil().formattedDate(DateTime.parse(callHistory[index].date!)),
+                                                  DateUtil().formattedDate(
+                                                      DateTime.parse(
+                                                          callHistory[index]
+                                                              .date!)),
                                                   style: TextStyle(
                                                     fontSize: width * 0.035,
                                                     color: hintColor,
@@ -194,7 +229,8 @@ class _VideoCallHistoryState extends State<VideoCallHistory> {
                               ),
                             ),
                             Container(
-                              margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                              margin: const EdgeInsets.symmetric(
+                                  vertical: 5, horizontal: 10),
                               child: Column(
                                 children: [
                                   Container(
@@ -212,27 +248,46 @@ class _VideoCallHistoryState extends State<VideoCallHistory> {
                       },
                     )
                   : Center(
-                      child: Image.asset("assets/images/no-data.png"),
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            height: 120,
+                          ),
+                          Image.asset(
+                            "assets/images/nothing.png",
+                            height: 250,
+                          ),
+                          Text(
+                            'No Call History',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
                     );
             } else {
               return Center(
                 child: CircularProgressIndicator(color: loginButton),
               );
             }
-        },
+          },
+        ),
       ),
-          ),
     );
   }
 
-  Future<BaseModel<VideoCallHistoryShowModel>> callApiShowVideoCallHistory() async {
+  Future<BaseModel<VideoCallHistoryShowModel>>
+      callApiShowVideoCallHistory() async {
     VideoCallHistoryShowModel response;
     setState(() {
       loading = true;
     });
     try {
       callHistory.clear();
-      response = await RestClient(RetroApi().dioData()).videoCallHistoryShowRequest();
+      response =
+          await RestClient(RetroApi().dioData()).videoCallHistoryShowRequest();
       if (response.success == true) {
         setState(
           () {

@@ -22,7 +22,6 @@ class CreateAccount extends StatefulWidget {
 }
 
 class _CreateAccountState extends State<CreateAccount> {
-
   //Set Height/Width Using MediaQuery
   late double width;
   late double height;
@@ -32,15 +31,16 @@ class _CreateAccountState extends State<CreateAccount> {
 
 //Set DropDown For Male/Female
   List<String> gender = [];
-  String? _genderSelect ;
+  String? _genderSelect;
 
   @override
   void initState() {
     super.initState();
 
-    Future.delayed(Duration.zero,(){
+    Future.delayed(Duration.zero, () {
       gender = [
-        getTranslated(context,gender_male).toString(),getTranslated(context,gender_female).toString(),
+        getTranslated(context, gender_male).toString(),
+        getTranslated(context, gender_female).toString(),
       ];
     });
   }
@@ -62,16 +62,16 @@ class _CreateAccountState extends State<CreateAccount> {
 
   @override
   Widget build(BuildContext context) {
-
     width = MediaQuery.of(context).size.width;
     height = MediaQuery.of(context).size.height;
 
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size(width, height*0.08),
+        preferredSize: Size(width, height * 0.08),
         child: SafeArea(
           child: Container(
-            margin: EdgeInsets.only(left: width*0.05,right: width*0.05,top: height*0.02),
+            margin: EdgeInsets.only(
+                left: width * 0.05, right: width * 0.05, top: height * 0.02),
             alignment: AlignmentDirectional.topStart,
             child: InkWell(
               child: Padding(
@@ -97,9 +97,11 @@ class _CreateAccountState extends State<CreateAccount> {
                 children: [
                   Container(
                     margin: EdgeInsets.only(
-                        top: height * 0.04, left: width * 0.073, right: width * 0.073),
+                        top: height * 0.04,
+                        left: width * 0.073,
+                        right: width * 0.073),
                     child: Text(
-                     getTranslated(context, register_heading).toString(),
+                      getTranslated(context, register_heading).toString(),
                       style: TextStyle(
                           fontSize: width * 0.07,
                           fontWeight: FontWeight.bold,
@@ -108,23 +110,34 @@ class _CreateAccountState extends State<CreateAccount> {
                   ),
                   Container(
                     margin: EdgeInsets.only(
-                        left: width * 0.020, right: width * 0.020, top: height * 0.027),
+                        left: width * 0.020,
+                        right: width * 0.020,
+                        top: height * 0.027),
                     child: Column(
                       children: [
                         Container(
                           margin: EdgeInsets.only(
-                              top: height * 0.01, left: width * 0.05, right: width * 0.05),
-                          padding: EdgeInsets.symmetric(horizontal: 15, vertical: 2),
+                              top: height * 0.01,
+                              left: width * 0.05,
+                              right: width * 0.05),
+                          padding:
+                              EdgeInsets.symmetric(horizontal: 15, vertical: 2),
                           decoration: BoxDecoration(
-                              color: cardColor, borderRadius: BorderRadius.circular(10)),
+                              color: cardColor,
+                              borderRadius: BorderRadius.circular(10)),
                           child: TextFormField(
                             controller: _name,
                             keyboardType: TextInputType.name,
-                            inputFormatters: [ FilteringTextInputFormatter.allow(RegExp("[a-zA-Z ]")), ],
+                            inputFormatters: [
+                              FilteringTextInputFormatter.allow(
+                                  RegExp("[a-zA-Z ]")),
+                            ],
                             textCapitalization: TextCapitalization.words,
                             decoration: InputDecoration(
                               border: InputBorder.none,
-                              hintText: getTranslated(context, register_full_name).toString(),
+                              hintText:
+                                  getTranslated(context, register_full_name)
+                                      .toString(),
                               hintStyle: TextStyle(
                                 fontSize: width * 0.04,
                                 color: hintColor,
@@ -132,10 +145,13 @@ class _CreateAccountState extends State<CreateAccount> {
                             ),
                             validator: (String? value) {
                               if (value!.isEmpty) {
-                                return getTranslated(context, please_enter_full_name).toString();
-                              }
-                              else if(value.trim().length < 1){
-                                return  getTranslated(context, please_enter_valid_name).toString();
+                                return getTranslated(
+                                        context, please_enter_full_name)
+                                    .toString();
+                              } else if (value.trim().length < 1) {
+                                return getTranslated(
+                                        context, please_enter_valid_name)
+                                    .toString();
                               }
                               return null;
                             },
@@ -144,40 +160,47 @@ class _CreateAccountState extends State<CreateAccount> {
                         ),
                         Container(
                           margin: EdgeInsets.only(
-                              top: height * 0.01, left: width * 0.05, right: width * 0.05),
-                          padding: EdgeInsets.symmetric(horizontal: 15, vertical: 2),
+                              top: height * 0.01,
+                              left: width * 0.05,
+                              right: width * 0.05),
+                          padding:
+                              EdgeInsets.symmetric(horizontal: 15, vertical: 2),
                           decoration: BoxDecoration(
-                              color: cardColor, borderRadius: BorderRadius.circular(10)),
+                              color: cardColor,
+                              borderRadius: BorderRadius.circular(10)),
                           child: TextFormField(
                             controller: _email,
                             keyboardType: TextInputType.text,
                             decoration: InputDecoration(
                               border: InputBorder.none,
-                              hintText: getTranslated(context, register_email_hint).toString(),
+                              hintText:
+                                  getTranslated(context, register_email_hint)
+                                      .toString(),
                               hintStyle: TextStyle(
-                                  fontSize: width * 0.04,
-                                  color: hintColor,
-                                 ),
+                                fontSize: width * 0.04,
+                                color: hintColor,
+                              ),
                             ),
                             validator: (String? value) {
-
                               Pattern pattern =
                                   r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
                               RegExp regex = new RegExp(pattern as String);
 
                               if (value!.length == 0) {
-                                return getTranslated(context, please_enter_email).toString();
+                                return getTranslated(
+                                        context, please_enter_email)
+                                    .toString();
                               }
                               if (!regex.hasMatch(value)) {
-                                return getTranslated(context, please_enter_valid_email).toString();
+                                return getTranslated(
+                                        context, please_enter_valid_email)
+                                    .toString();
                               }
                               return null;
                             },
-
                             onSaved: (String? name) {},
                           ),
                         ),
-
                         Container(
                           child: Row(
                             children: [
@@ -212,32 +235,75 @@ class _CreateAccountState extends State<CreateAccount> {
                                         ),
                                         controller: _phoneCode,
                                         decoration: InputDecoration(
-                                          hintText: '+91',
+                                          hintText: 'Country',
                                           border: InputBorder.none,
-                                          hintStyle: TextStyle(fontSize: width * 0.04,
-                                              color: hintColor,
+                                          hintStyle: TextStyle(
+                                            fontSize: width * 0.04,
+                                            color: hintColor,
                                           ),
                                         ),
                                         onTap: () {
                                           showCountryPicker(
                                             context: context,
-                                            exclude: <String>['KN', 'MF'],
+                                            //exclude: <String>['KN', 'MF'],
                                             showPhoneCode: true,
+                                            countryFilter: <String>[
+                                              'US',
+                                              'CA',
+                                              'IN',
+                                              'AT',
+                                              'BE',
+                                              'BG',
+                                              'HR',
+                                              'CY',
+                                              'CZ',
+                                              'DK',
+                                              'EE',
+                                              'FI',
+                                              'FR',
+                                              'DE',
+                                              'GR',
+                                              'HU',
+                                              'IE',
+                                              'IT',
+                                              'LV',
+                                              'LT',
+                                              'LU',
+                                              'MT',
+                                              'NL',
+                                              'PL',
+                                              'PT',
+                                              'RO',
+                                              'SK',
+                                              'SI',
+                                              'ES',
+                                              'SE',
+                                              'EU'
+                                            ],
                                             onSelect: (Country country) {
-                                              _phoneCode.text = "+" + country.phoneCode;
+                                              _phoneCode.text =
+                                                  "+" + country.phoneCode;
                                             },
-                                            countryListTheme: CountryListThemeData(
+                                            countryListTheme:
+                                                CountryListThemeData(
                                               borderRadius: BorderRadius.only(
                                                 topLeft: Radius.circular(40.0),
                                                 topRight: Radius.circular(40.0),
                                               ),
                                               inputDecoration: InputDecoration(
-                                                labelText: getTranslated(context, register_phone_code_search).toString(),
-                                                hintText: getTranslated(context, register_typing_search).toString(),
-                                                prefixIcon: const Icon(Icons.search),
+                                                labelText: getTranslated(
+                                                        context,
+                                                        register_phone_code_search)
+                                                    .toString(),
+                                                hintText: getTranslated(context,
+                                                        register_typing_search)
+                                                    .toString(),
+                                                prefixIcon:
+                                                    const Icon(Icons.search),
                                                 border: OutlineInputBorder(
                                                   borderSide: BorderSide(
-                                                    color:  hintColor.withOpacity(0.2),
+                                                    color: hintColor
+                                                        .withOpacity(0.2),
                                                   ),
                                                 ),
                                               ),
@@ -253,19 +319,27 @@ class _CreateAccountState extends State<CreateAccount> {
                                 width: width * 0.60,
                                 height: height * 0.06,
                                 margin: EdgeInsets.only(
-                                    top: height * 0.01,
+                                  top: height * 0.01,
                                 ),
-                                padding: EdgeInsets.symmetric(horizontal: 15, vertical: 1),
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 15, vertical: 1),
                                 decoration: BoxDecoration(
                                     color: cardColor,
                                     borderRadius: BorderRadius.circular(10)),
                                 child: TextFormField(
                                   controller: _phone,
-                                  keyboardType: TextInputType.numberWithOptions(decimal: true),
-                                  inputFormatters: [new FilteringTextInputFormatter.allow(RegExp("[0-9]")),LengthLimitingTextInputFormatter(10)],
+                                  keyboardType: TextInputType.numberWithOptions(
+                                      decimal: true),
+                                  inputFormatters: [
+                                    new FilteringTextInputFormatter.allow(
+                                        RegExp("[0-9]")),
+                                    LengthLimitingTextInputFormatter(10)
+                                  ],
                                   decoration: InputDecoration(
                                     border: InputBorder.none,
-                                    hintText: getTranslated(context, register_phone_no).toString(),
+                                    hintText: getTranslated(
+                                            context, register_phone_no)
+                                        .toString(),
                                     hintStyle: TextStyle(
                                       fontSize: width * 0.04,
                                       color: hintColor,
@@ -274,10 +348,14 @@ class _CreateAccountState extends State<CreateAccount> {
                                   validator: (String? value) {
                                     print(' ${value!.length}');
                                     if (value.isEmpty) {
-                                      return getTranslated(context, please_enter_phone_no).toString();
+                                      return getTranslated(
+                                              context, please_enter_phone_no)
+                                          .toString();
                                     }
                                     if (value.length != 10) {
-                                      return getTranslated(context, please_enter_valid_number).toString();
+                                      return getTranslated(context,
+                                              please_enter_valid_number)
+                                          .toString();
                                     }
                                     return null;
                                   },
@@ -289,10 +367,14 @@ class _CreateAccountState extends State<CreateAccount> {
                         ),
                         Container(
                           margin: EdgeInsets.only(
-                              top: height * 0.01, left: width * 0.05, right: width * 0.05),
-                          padding: EdgeInsets.symmetric(horizontal: 15, vertical: 2),
+                              top: height * 0.01,
+                              left: width * 0.05,
+                              right: width * 0.05),
+                          padding:
+                              EdgeInsets.symmetric(horizontal: 15, vertical: 2),
                           decoration: BoxDecoration(
-                              color: cardColor, borderRadius: BorderRadius.circular(10)),
+                              color: cardColor,
+                              borderRadius: BorderRadius.circular(10)),
                           child: TextFormField(
                             textCapitalization: TextCapitalization.words,
                             style: TextStyle(
@@ -302,16 +384,20 @@ class _CreateAccountState extends State<CreateAccount> {
                             controller: _dob,
                             readOnly: true,
                             decoration: InputDecoration(
-                              hintText: getTranslated(context, register_birth_date_hint).toString(),
+                              hintText: getTranslated(
+                                      context, register_birth_date_hint)
+                                  .toString(),
                               border: InputBorder.none,
                               hintStyle: TextStyle(
-                                  fontSize: width * 0.04,
-                                  color: hintColor,
-                                  ),
+                                fontSize: width * 0.04,
+                                color: hintColor,
+                              ),
                             ),
                             validator: (String? value) {
                               if (value!.isEmpty) {
-                                return getTranslated(context, please_select_birth_date).toString();
+                                return getTranslated(
+                                        context, please_select_birth_date)
+                                    .toString();
                               }
                               return null;
                             },
@@ -322,39 +408,48 @@ class _CreateAccountState extends State<CreateAccount> {
                         ),
                         Container(
                           margin: EdgeInsets.only(
-                              top: height * 0.01, left: width * 0.05, right: width * 0.05),
-                          padding: EdgeInsets.symmetric(horizontal: 15, vertical: 3),
+                              top: height * 0.01,
+                              left: width * 0.05,
+                              right: width * 0.05),
+                          padding:
+                              EdgeInsets.symmetric(horizontal: 15, vertical: 3),
                           decoration: BoxDecoration(
-                              color: cardColor, borderRadius: BorderRadius.circular(10)),
+                              color: cardColor,
+                              borderRadius: BorderRadius.circular(10)),
                           child: DropdownButtonFormField(
                             decoration: InputDecoration(
                               border: InputBorder.none,
-                              hintText: getTranslated(context, register_select_gender_hint).toString(),
+                              hintText: getTranslated(
+                                      context, register_select_gender_hint)
+                                  .toString(),
                               hintStyle: TextStyle(
-                                  fontSize: width * 0.04,
-                                  color: hintColor,
-                                  ),
+                                fontSize: width * 0.04,
+                                color: hintColor,
+                              ),
                             ),
                             value: _genderSelect,
                             isExpanded: true,
                             iconSize: 25,
                             onSaved: (dynamic value) {
                               setState(
-                                    () {
+                                () {
                                   _genderSelect = value;
                                 },
                               );
                             },
                             onChanged: (dynamic newValue) {
                               setState(
-                                    () {
-                                      _genderSelect = newValue;
+                                () {
+                                  _genderSelect = newValue;
                                 },
                               );
                             },
-                            validator: (dynamic value) => value == null ? getTranslated(context, please_select_gender).toString(): null,
+                            validator: (dynamic value) => value == null
+                                ? getTranslated(context, please_select_gender)
+                                    .toString()
+                                : null,
                             items: gender.map(
-                                  (location) {
+                              (location) {
                                 return DropdownMenuItem<String>(
                                   child: new Text(
                                     location,
@@ -368,42 +463,53 @@ class _CreateAccountState extends State<CreateAccount> {
                               },
                             ).toList(),
                           ),
-
                         ),
                         Container(
                           margin: EdgeInsets.only(
-                              top: height * 0.01, left: width * 0.05, right: width * 0.05),
-                          padding: EdgeInsets.symmetric(horizontal: 15, vertical: 2),
+                              top: height * 0.01,
+                              left: width * 0.05,
+                              right: width * 0.05),
+                          padding:
+                              EdgeInsets.symmetric(horizontal: 15, vertical: 2),
                           decoration: BoxDecoration(
-                              color: cardColor, borderRadius: BorderRadius.circular(10)),
+                              color: cardColor,
+                              borderRadius: BorderRadius.circular(10)),
                           child: TextFormField(
-                            controller:_password ,
+                            controller: _password,
                             keyboardType: TextInputType.name,
-                            inputFormatters:[FilteringTextInputFormatter.allow(RegExp('[a-zA-Z0-9!@#\$.*&~_]'))],
+                            inputFormatters: [
+                              FilteringTextInputFormatter.allow(
+                                  RegExp('[a-zA-Z0-9!@#\$.*&~_]'))
+                            ],
                             decoration: InputDecoration(
                               border: InputBorder.none,
-                              hintText: getTranslated(context, register_password_hint).toString(),
+                              hintText:
+                                  getTranslated(context, register_password_hint)
+                                      .toString(),
                               hintStyle: TextStyle(
                                 fontSize: width * 0.04,
                                 color: hintColor,
-                              ), suffixIcon: IconButton(
-                              icon: Icon(
-                                _isHidden
-                                    ? Icons.visibility
-                                    : Icons.visibility_off,
-                                color: passwordVisibility,
                               ),
-                              onPressed: () {
-                                setState(() {
-                                  _isHidden = !_isHidden;
-                                });
-                              },
-                            ),
+                              suffixIcon: IconButton(
+                                icon: Icon(
+                                  _isHidden
+                                      ? Icons.visibility
+                                      : Icons.visibility_off,
+                                  color: passwordVisibility,
+                                ),
+                                onPressed: () {
+                                  setState(() {
+                                    _isHidden = !_isHidden;
+                                  });
+                                },
+                              ),
                             ),
                             obscureText: _isHidden,
                             validator: (String? value) {
                               if (value!.isEmpty) {
-                                return getTranslated(context, please_enter_password).toString();
+                                return getTranslated(
+                                        context, please_enter_password)
+                                    .toString();
                               }
                               return null;
                             },
@@ -422,45 +528,45 @@ class _CreateAccountState extends State<CreateAccount> {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    child:
-                        Container(
-                          margin: EdgeInsets.symmetric(horizontal: 16),
-                          width: width * 1.0,
-                          height: height * 0.06,
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                primary: loginButton
-                            ),
-                            child: Text(
-                                getTranslated(context, register_button).toString(),
-                              style: TextStyle(fontSize: width * 0.045),
-                              textAlign: TextAlign.center,
-                            ),
-                            onPressed: () {
-                              if (_formkey.currentState!.validate()) {
-                                callApiForRegister();
-                              }
-                            },
-                          ),
+                    child: Container(
+                      margin: EdgeInsets.symmetric(horizontal: 16),
+                      width: width * 1.0,
+                      height: height * 0.06,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(primary: loginButton),
+                        child: Text(
+                          getTranslated(context, register_button).toString(),
+                          style: TextStyle(fontSize: width * 0.045),
+                          textAlign: TextAlign.center,
                         ),
+                        onPressed: () {
+                          if (_formkey.currentState!.validate()) {
+                            callApiForRegister();
+                          }
+                        },
+                      ),
+                    ),
                   ),
                   Container(
                     child: Text(
                       getTranslated(context, register_description).toString(),
-                      style: TextStyle(fontSize: width * 0.03, color: hintColor),
+                      style:
+                          TextStyle(fontSize: width * 0.03, color: hintColor),
                       textAlign: TextAlign.center,
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(top:10,bottom: 20),
+                    margin: EdgeInsets.only(top: 10, bottom: 20),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Row(
                           children: [
                             Text(
-                              getTranslated(context, register_all_ready_account).toString(),
-                              style: TextStyle(fontSize: width * 0.035, color: hintColor),
+                              getTranslated(context, register_all_ready_account)
+                                  .toString(),
+                              style: TextStyle(
+                                  fontSize: width * 0.035, color: hintColor),
                             ),
                           ],
                         ),
@@ -472,7 +578,9 @@ class _CreateAccountState extends State<CreateAccount> {
                                 onTap: () {
                                   Navigator.pushNamed(context, 'SignIn');
                                 },
-                                child: Text(getTranslated(context, register_sign_in).toString(),
+                                child: Text(
+                                    getTranslated(context, register_sign_in)
+                                        .toString(),
                                     style: TextStyle(
                                         color: loginButton,
                                         fontWeight: FontWeight.bold,
@@ -494,7 +602,8 @@ class _CreateAccountState extends State<CreateAccount> {
   }
 
   Future<BaseModel<Register>> callApiForRegister() async {
-    newDateApiPass = DateUtilforpass().formattedDate(DateTime.parse('$_selectedDate'));
+    newDateApiPass =
+        DateUtilforpass().formattedDate(DateTime.parse('$_selectedDate'));
 
     Map<String, dynamic> body = {
       "name": _name.text,
@@ -511,18 +620,19 @@ class _CreateAccountState extends State<CreateAccount> {
       CommonFunction.onLoading(context);
       response = await RestClient(RetroApi().dioData()).registerrequest(body);
       CommonFunction.hideDialog(context);
-        final data = OtpData(otp: response.data!.otp, id: response.data!.id);
-        response.data!.verify != 1 ?
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => PhoneVerificationScreen(data: data)),
-        ) : Navigator.pushNamed(context, 'SignIn');
-        Fluttertoast.showToast(
-          msg: response.msg!,
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.BOTTOM,
-        );
-
+      final data = OtpData(otp: response.data!.otp, id: response.data!.id);
+      response.data!.verify != 1
+          ? Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => PhoneVerificationScreen(data: data)),
+            )
+          : Navigator.pushNamed(context, 'SignIn');
+      Fluttertoast.showToast(
+        msg: response.msg!,
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+      );
     } catch (error, stacktrace) {
       CommonFunction.hideDialog(context);
       print("Exception occur: $error stackTrace: $stacktrace");
@@ -557,12 +667,13 @@ class _CreateAccountState extends State<CreateAccount> {
       _dob
         ..text = DateFormat('dd-MM-yyyy').format(_selectedDate!)
         ..selection = TextSelection.fromPosition(
-          TextPosition(offset: _dob.text.length, affinity: TextAffinity.upstream),
+          TextPosition(
+              offset: _dob.text.length, affinity: TextAffinity.upstream),
         );
     }
   }
-
 }
+
 class DateUtilforpass {
   static const DATE_FORMAT = 'yyyy-MM-dd';
 
@@ -570,4 +681,3 @@ class DateUtilforpass {
     return DateFormat(DATE_FORMAT).format(dateTime);
   }
 }
-

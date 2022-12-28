@@ -96,14 +96,14 @@ class _RateAndReviewScreenState extends State<RateAndReviewScreen> {
       dname = SharedPreferenceHelper.getString(Preferences.name);
       dfullimage = SharedPreferenceHelper.getString(Preferences.image);
       phone = SharedPreferenceHelper.getString(Preferences.phone_no);
-      subscription = SharedPreferenceHelper.getInt(Preferences.subscription_status);
+      subscription =
+          SharedPreferenceHelper.getInt(Preferences.subscription_status);
       reviewDatas = reviewrequset();
     });
   }
 
   @override
   Widget build(BuildContext context) {
-
     width = MediaQuery.of(context).size.width;
     height = MediaQuery.of(context).size.height;
 
@@ -123,16 +123,19 @@ class _RateAndReviewScreenState extends State<RateAndReviewScreen> {
                       Container(
                         width: 80,
                         height: 80,
-                        decoration: new BoxDecoration(shape: BoxShape.circle, boxShadow: [
-                          new BoxShadow(
-                            color: imageBorder,
-                            blurRadius: 1.0,
-                          ),
-                        ]),
+                        decoration: new BoxDecoration(
+                            shape: BoxShape.circle,
+                            boxShadow: [
+                              new BoxShadow(
+                                color: imageBorder,
+                                blurRadius: 1.0,
+                              ),
+                            ]),
                         child: CachedNetworkImage(
                           alignment: Alignment.center,
                           imageUrl: '$dfullimage',
-                          imageBuilder: (context, imageProvider) => CircleAvatar(
+                          imageBuilder: (context, imageProvider) =>
+                              CircleAvatar(
                             radius: 50,
                             backgroundColor: colorWhite,
                             child: CircleAvatar(
@@ -140,8 +143,10 @@ class _RateAndReviewScreenState extends State<RateAndReviewScreen> {
                               backgroundImage: imageProvider,
                             ),
                           ),
-                          placeholder: (context, url) => CircularProgressIndicator(color: loginButton),
-                          errorWidget: (context, url, error) => Image.asset("assets/images/no_image.jpg"),
+                          placeholder: (context, url) =>
+                              CircularProgressIndicator(color: loginButton),
+                          errorWidget: (context, url, error) =>
+                              Image.asset("assets/images/no_image.jpg"),
                         ),
                       ),
                       Column(
@@ -159,7 +164,8 @@ class _RateAndReviewScreenState extends State<RateAndReviewScreen> {
                           ),
                           Text(
                             "$phone",
-                            style: TextStyle(fontSize: 14, color: passwordVisibility),
+                            style: TextStyle(
+                                fontSize: 14, color: passwordVisibility),
                           ),
                         ],
                       ),
@@ -180,85 +186,141 @@ class _RateAndReviewScreenState extends State<RateAndReviewScreen> {
                 flex: 11,
                 child: subscription == -1
                     ? ListView.builder(
-                  physics: AlwaysScrollableScrollPhysics(),
-                  shrinkWrap: false,
-                  scrollDirection: Axis.vertical,
-                  itemCount: _drawerMenu.length,
-                  padding: EdgeInsets.zero,
-                  itemBuilder: (context, index) {
-                    return ListTile(
-                      onTap: () {
-                        if (_drawerMenu[index] == getTranslated(context, drawer_home).toString()) {
-                          Navigator.popAndPushNamed(context, "loginhome");
-                        } else if (_drawerMenu[index] == getTranslated(context, drawer_payments).toString()) {
-                          Navigator.popAndPushNamed(context, 'payment');
-                        } else if (_drawerMenu[index] == getTranslated(context, drawer_canceled_appointment).toString()) {
-                          Navigator.popAndPushNamed(context, 'cancelappoitment');
-                        } else if (_drawerMenu[index] == getTranslated(context, drawer_appointments).toString()) {
-                          Navigator.popAndPushNamed(context, 'AppointmentHistoryScreen');
-                        } else if (_drawerMenu[index] == getTranslated(context, drawer_review).toString()) {
-                          Navigator.popAndPushNamed(context, 'rateandreview');
-                        } else if (_drawerMenu[index] == getTranslated(context, drawer_notification).toString()) {
-                          Navigator.popAndPushNamed(context, 'notifications');
-                        } else if (_drawerMenu[index] == getTranslated(context, drawer_callHistory).toString()) {
-                          Navigator.popAndPushNamed(context, 'VideoCallHistory');
-                        } else if (_drawerMenu[index] == getTranslated(context, drawer_schedule_timing).toString()) {
-                          Navigator.popAndPushNamed(context, 'Schedule Timings');
-                        }else if (_drawerMenu[index] == getTranslated(context, drawer_setting).toString()) {
-                          Navigator.popAndPushNamed(context, 'Settings');
-                        } else if (_drawer[index] == getTranslated(context, chats).toString()) {
-                          Navigator.popAndPushNamed(context, 'ChatHome');
-                        } else if (_drawerMenu[index] == getTranslated(context, drawer_logout).toString()) {
-                          showAlertDialog(context);
-                        }
-                      },
-                      title: Text(
-                        _drawerMenu[index],
-                        style: TextStyle(color: hintColor),
-                      ),
-                    );
-                  },
-                )
+                        physics: AlwaysScrollableScrollPhysics(),
+                        shrinkWrap: false,
+                        scrollDirection: Axis.vertical,
+                        itemCount: _drawerMenu.length,
+                        padding: EdgeInsets.zero,
+                        itemBuilder: (context, index) {
+                          return ListTile(
+                            onTap: () {
+                              if (_drawerMenu[index] ==
+                                  getTranslated(context, drawer_home)
+                                      .toString()) {
+                                Navigator.popAndPushNamed(context, "loginhome");
+                              } else if (_drawerMenu[index] ==
+                                  getTranslated(context, drawer_payments)
+                                      .toString()) {
+                                Navigator.popAndPushNamed(context, 'payment');
+                              } else if (_drawerMenu[index] ==
+                                  getTranslated(
+                                          context, drawer_canceled_appointment)
+                                      .toString()) {
+                                Navigator.popAndPushNamed(
+                                    context, 'cancelappoitment');
+                              } else if (_drawerMenu[index] ==
+                                  getTranslated(context, drawer_appointments)
+                                      .toString()) {
+                                Navigator.popAndPushNamed(
+                                    context, 'AppointmentHistoryScreen');
+                              } else if (_drawerMenu[index] ==
+                                  getTranslated(context, drawer_review)
+                                      .toString()) {
+                                Navigator.popAndPushNamed(
+                                    context, 'rateandreview');
+                              } else if (_drawerMenu[index] ==
+                                  getTranslated(context, drawer_notification)
+                                      .toString()) {
+                                Navigator.popAndPushNamed(
+                                    context, 'notifications');
+                              } else if (_drawerMenu[index] ==
+                                  getTranslated(context, drawer_callHistory)
+                                      .toString()) {
+                                Navigator.popAndPushNamed(
+                                    context, 'VideoCallHistory');
+                              } else if (_drawerMenu[index] ==
+                                  getTranslated(context, drawer_schedule_timing)
+                                      .toString()) {
+                                Navigator.popAndPushNamed(
+                                    context, 'Schedule Timings');
+                              } else if (_drawerMenu[index] ==
+                                  getTranslated(context, drawer_setting)
+                                      .toString()) {
+                                Navigator.popAndPushNamed(context, 'Settings');
+                              } else if (_drawer[index] ==
+                                  getTranslated(context, chats).toString()) {
+                                Navigator.popAndPushNamed(context, 'ChatHome');
+                              } else if (_drawerMenu[index] ==
+                                  getTranslated(context, drawer_logout)
+                                      .toString()) {
+                                showAlertDialog(context);
+                              }
+                            },
+                            title: Text(
+                              _drawerMenu[index],
+                              style: TextStyle(color: hintColor),
+                            ),
+                          );
+                        },
+                      )
                     : ListView.builder(
-                  physics: AlwaysScrollableScrollPhysics(),
-                  shrinkWrap: false,
-                  scrollDirection: Axis.vertical,
-                  itemCount: _drawer.length,
-                  padding: EdgeInsets.zero,
-                  itemBuilder: (context, index) {
-                    return ListTile(
-                      onTap: () {
-                        if (_drawer[index] == getTranslated(context, drawer_home).toString()) {
-                          Navigator.popAndPushNamed(context, "loginhome");
-                        } else if (_drawer[index] == getTranslated(context, drawer_payments).toString()) {
-                          Navigator.popAndPushNamed(context, 'payment');
-                        } else if (_drawer[index] == getTranslated(context, drawer_canceled_appointment).toString()) {
-                          Navigator.popAndPushNamed(context, 'cancelappoitment');
-                        } else if (_drawer[index] == getTranslated(context, drawer_appointments).toString()) {
-                          Navigator.popAndPushNamed(context, 'AppointmentHistoryScreen');
-                        } else if (_drawer[index] == getTranslated(context, drawer_review).toString()) {
-                          Navigator.popAndPushNamed(context, 'rateandreview');
-                        } else if (_drawer[index] == getTranslated(context, drawer_notification).toString()) {
-                          Navigator.popAndPushNamed(context, 'notifications');
-                        } else if (_drawer[index] == getTranslated(context, drawer_callHistory).toString()) {
-                          Navigator.popAndPushNamed(context, 'VideoCallHistory');
-                        } else if (_drawer[index] == getTranslated(context, drawer_schedule_timing).toString()) {
-                          Navigator.popAndPushNamed(context, 'Schedule Timings');
-                        }else if (_drawer[index] == getTranslated(context, drawer_setting).toString()) {
-                          Navigator.popAndPushNamed(context, 'Settings');
-                        } else if (_drawer[index] == getTranslated(context, chats).toString()) {
-                          Navigator.popAndPushNamed(context, 'ChatHome');
-                        } else if (_drawer[index] == getTranslated(context, drawer_logout).toString()) {
-                          showAlertDialog(context);
-                        }
-                      },
-                      title: Text(
-                        _drawer[index],
-                        style: TextStyle(color: hintColor),
+                        physics: AlwaysScrollableScrollPhysics(),
+                        shrinkWrap: false,
+                        scrollDirection: Axis.vertical,
+                        itemCount: _drawer.length,
+                        padding: EdgeInsets.zero,
+                        itemBuilder: (context, index) {
+                          return ListTile(
+                            onTap: () {
+                              if (_drawer[index] ==
+                                  getTranslated(context, drawer_home)
+                                      .toString()) {
+                                Navigator.popAndPushNamed(context, "loginhome");
+                              } else if (_drawer[index] ==
+                                  getTranslated(context, drawer_payments)
+                                      .toString()) {
+                                Navigator.popAndPushNamed(context, 'payment');
+                              } else if (_drawer[index] ==
+                                  getTranslated(
+                                          context, drawer_canceled_appointment)
+                                      .toString()) {
+                                Navigator.popAndPushNamed(
+                                    context, 'cancelappoitment');
+                              } else if (_drawer[index] ==
+                                  getTranslated(context, drawer_appointments)
+                                      .toString()) {
+                                Navigator.popAndPushNamed(
+                                    context, 'AppointmentHistoryScreen');
+                              } else if (_drawer[index] ==
+                                  getTranslated(context, drawer_review)
+                                      .toString()) {
+                                Navigator.popAndPushNamed(
+                                    context, 'rateandreview');
+                              } else if (_drawer[index] ==
+                                  getTranslated(context, drawer_notification)
+                                      .toString()) {
+                                Navigator.popAndPushNamed(
+                                    context, 'notifications');
+                              } else if (_drawer[index] ==
+                                  getTranslated(context, drawer_callHistory)
+                                      .toString()) {
+                                Navigator.popAndPushNamed(
+                                    context, 'VideoCallHistory');
+                              } else if (_drawer[index] ==
+                                  getTranslated(context, drawer_schedule_timing)
+                                      .toString()) {
+                                Navigator.popAndPushNamed(
+                                    context, 'Schedule Timings');
+                              } else if (_drawer[index] ==
+                                  getTranslated(context, drawer_setting)
+                                      .toString()) {
+                                Navigator.popAndPushNamed(context, 'Settings');
+                              } else if (_drawer[index] ==
+                                  getTranslated(context, chats).toString()) {
+                                Navigator.popAndPushNamed(context, 'ChatHome');
+                              } else if (_drawer[index] ==
+                                  getTranslated(context, drawer_logout)
+                                      .toString()) {
+                                showAlertDialog(context);
+                              }
+                            },
+                            title: Text(
+                              _drawer[index],
+                              style: TextStyle(color: hintColor),
+                            ),
+                          );
+                        },
                       ),
-                    );
-                  },
-                ),
               ),
             ],
           ),
@@ -273,18 +335,23 @@ class _RateAndReviewScreenState extends State<RateAndReviewScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(
-                      margin: EdgeInsets.only(left: width * 0.06, right: width * 0.06, top: height * 0.01),
+                      margin: EdgeInsets.only(
+                          left: width * 0.06,
+                          right: width * 0.06,
+                          top: height * 0.01),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                           Column(
+                          Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Container(
-                                child:  Text(
-                                  getTranslated(context, review_heading).toString(),
-                                  style: TextStyle(fontSize: width * 0.05, color: hintColor),
+                                child: Text(
+                                  getTranslated(context, review_heading)
+                                      .toString(),
+                                  style: TextStyle(
+                                      fontSize: width * 0.05, color: hintColor),
                                 ),
                               ),
                             ],
@@ -317,7 +384,8 @@ class _RateAndReviewScreenState extends State<RateAndReviewScreen> {
                     ),
                     child: Container(
                         alignment: AlignmentDirectional.center,
-                        margin: EdgeInsets.only(left: width * 0.05, right: width * 0.05),
+                        margin: EdgeInsets.only(
+                            left: width * 0.05, right: width * 0.05),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -329,7 +397,9 @@ class _RateAndReviewScreenState extends State<RateAndReviewScreen> {
                                 controller: _search,
                                 decoration: InputDecoration(
                                   border: InputBorder.none,
-                                  hintText: getTranslated(context, review_search).toString(),
+                                  hintText:
+                                      getTranslated(context, review_search)
+                                          .toString(),
                                   hintStyle: TextStyle(
                                     color: hintColor.withOpacity(0.3),
                                   ),
@@ -351,7 +421,8 @@ class _RateAndReviewScreenState extends State<RateAndReviewScreen> {
               ]))),
       body: WillPopScope(
         onWillPop: () {
-          Navigator.pushNamedAndRemoveUntil(context, 'loginhome', (route) => false);
+          Navigator.pushNamedAndRemoveUntil(
+              context, 'loginhome', (route) => false);
           return Future<bool>.value(false);
         },
         child: FutureBuilder(
@@ -372,11 +443,16 @@ class _RateAndReviewScreenState extends State<RateAndReviewScreen> {
                         children: [
                           Container(
                             alignment: AlignmentDirectional.topStart,
-                            margin: EdgeInsets.only(left: width * 0.08, right: width * 0.08, top: height * 0.020),
+                            margin: EdgeInsets.only(
+                                left: width * 0.08,
+                                right: width * 0.08,
+                                top: height * 0.020),
                             child: Container(
                               child: Text(
-                                getTranslated(context, review_heading).toString(),
-                                style: TextStyle(fontSize: width * 0.05, color: hintColor),
+                                getTranslated(context, review_heading)
+                                    .toString(),
+                                style: TextStyle(
+                                    fontSize: width * 0.05, color: hintColor),
                               ),
                             ),
                           ),
@@ -385,7 +461,21 @@ class _RateAndReviewScreenState extends State<RateAndReviewScreen> {
                                   child: Container(
                                     margin: EdgeInsets.only(top: height * 0.2),
                                     child: Container(
-                                      child: Image.asset("assets/images/no-data.png"),
+                                      child: Column(
+                                        children: [
+                                          Image.asset(
+                                            "assets/images/nothing.png",
+                                            height: 250,
+                                          ),
+                                          Text(
+                                            'Nothing Found',
+                                            style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 )
@@ -393,49 +483,84 @@ class _RateAndReviewScreenState extends State<RateAndReviewScreen> {
                                   ? _searchResult.length > 0
                                       ? ListView.builder(
                                           shrinkWrap: true,
-                                          physics: NeverScrollableScrollPhysics(),
+                                          physics:
+                                              NeverScrollableScrollPhysics(),
                                           itemCount: _searchResult.length,
                                           itemBuilder: (context, i) {
-                                            String createDate = DateUtil().formattedDate(DateTime.parse(_searchResult[i].createdAt!));
+                                            String createDate = DateUtil()
+                                                .formattedDate(DateTime.parse(
+                                                    _searchResult[i]
+                                                        .createdAt!));
                                             return Container(
-                                                margin: EdgeInsets.only(left: width * 0.02, right: width * 0.02),
+                                                margin: EdgeInsets.only(
+                                                    left: width * 0.02,
+                                                    right: width * 0.02),
                                                 width: width * 0.87,
                                                 height: 100,
-                                                child: Column(children: <Widget>[
+                                                child:
+                                                    Column(children: <Widget>[
                                                   Container(
                                                     child: ListTile(
                                                       leading: SizedBox(
                                                         height: 70,
                                                         width: 60,
                                                         child: ClipRRect(
-                                                          borderRadius: BorderRadius.circular(10),
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(10),
                                                           child: Container(
                                                               decoration: new BoxDecoration(
                                                                   image: new DecorationImage(
-                                                                      fit: BoxFit.fitHeight,
-                                                                      image: NetworkImage(_searchResult[i].user!.fullImage!)))),
+                                                                      fit: BoxFit
+                                                                          .fitHeight,
+                                                                      image: NetworkImage(_searchResult[
+                                                                              i]
+                                                                          .user!
+                                                                          .fullImage!)))),
                                                         ),
                                                       ),
                                                       title: Row(
-                                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
                                                         children: [
                                                           Container(
-                                                            alignment: AlignmentDirectional.topStart,
-                                                            margin: EdgeInsets.only(
-                                                              top: height * 0.01,
+                                                            alignment:
+                                                                AlignmentDirectional
+                                                                    .topStart,
+                                                            margin:
+                                                                EdgeInsets.only(
+                                                              top:
+                                                                  height * 0.01,
                                                             ),
-                                                            child: Text(_searchResult[i].user!.name!, style: TextStyle(fontSize: 16.0)),
+                                                            child: Text(
+                                                                _searchResult[i]
+                                                                    .user!
+                                                                    .name!,
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        16.0)),
                                                           ),
                                                           Container(
-                                                            child: RatingBarIndicator(
-                                                              rating: _searchResult[i].rate!.toDouble(),
-                                                              itemBuilder: (context, index) => Icon(
+                                                            child:
+                                                                RatingBarIndicator(
+                                                              rating:
+                                                                  _searchResult[
+                                                                          i]
+                                                                      .rate!
+                                                                      .toDouble(),
+                                                              itemBuilder:
+                                                                  (context,
+                                                                          index) =>
+                                                                      Icon(
                                                                 Icons.star,
-                                                                color: loginButton,
+                                                                color:
+                                                                    loginButton,
                                                               ),
                                                               itemCount: 5,
                                                               itemSize: 18.0,
-                                                              direction: Axis.horizontal,
+                                                              direction: Axis
+                                                                  .horizontal,
                                                             ),
                                                           ),
                                                         ],
@@ -443,19 +568,33 @@ class _RateAndReviewScreenState extends State<RateAndReviewScreen> {
                                                       subtitle: Column(
                                                         children: <Widget>[
                                                           Container(
-                                                            alignment: AlignmentDirectional.topStart,
+                                                            alignment:
+                                                                AlignmentDirectional
+                                                                    .topStart,
                                                             child: Text(
-                                                              _searchResult[i].review!,
-                                                              style: TextStyle(fontSize: 12, color: passwordVisibility),
-                                                              overflow: TextOverflow.ellipsis,
+                                                              _searchResult[i]
+                                                                  .review!,
+                                                              style: TextStyle(
+                                                                  fontSize: 12,
+                                                                  color:
+                                                                      passwordVisibility),
+                                                              overflow:
+                                                                  TextOverflow
+                                                                      .ellipsis,
                                                               maxLines: 2,
                                                             ),
                                                           ),
                                                           Container(
-                                                              alignment: AlignmentDirectional.topStart,
+                                                              alignment:
+                                                                  AlignmentDirectional
+                                                                      .topStart,
                                                               child: Text(
                                                                 "$createDate",
-                                                                style: TextStyle(fontSize: 12, color: passwordVisibility),
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        12,
+                                                                    color:
+                                                                        passwordVisibility),
                                                               )),
                                                         ],
                                                       ),
@@ -468,8 +607,11 @@ class _RateAndReviewScreenState extends State<RateAndReviewScreen> {
                                           height: height / 1.5,
                                           child: Center(
                                               child: Container(
-                                            margin: EdgeInsets.only(top: height * 0.02),
-                                            child: Text(getTranslated(context, result_not_found).toString()),
+                                            margin: EdgeInsets.only(
+                                                top: height * 0.02),
+                                            child: Text(getTranslated(
+                                                    context, result_not_found)
+                                                .toString()),
                                           )))
                                   : ListView.builder(
                                       physics: NeverScrollableScrollPhysics(),
@@ -478,9 +620,13 @@ class _RateAndReviewScreenState extends State<RateAndReviewScreen> {
                                       scrollDirection: Axis.vertical,
                                       itemCount: reviewData.length,
                                       itemBuilder: (context, index) {
-                                        String createDate = DateUtil().formattedDate(DateTime.parse(reviewData[index].createdAt!));
+                                        String createDate = DateUtil()
+                                            .formattedDate(DateTime.parse(
+                                                reviewData[index].createdAt!));
                                         return Container(
-                                            margin: EdgeInsets.only(left: width * 0.02, right: width * 0.02),
+                                            margin: EdgeInsets.only(
+                                                left: width * 0.02,
+                                                right: width * 0.02),
                                             width: width * 0.87,
                                             height: 100,
                                             child: Column(children: <Widget>[
@@ -491,34 +637,58 @@ class _RateAndReviewScreenState extends State<RateAndReviewScreen> {
                                                     height: 70,
                                                     width: 60,
                                                     child: ClipRRect(
-                                                      borderRadius: BorderRadius.circular(10),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              10),
                                                       child: Container(
                                                           decoration: new BoxDecoration(
                                                               image: new DecorationImage(
-                                                                  fit: BoxFit.fitHeight,
-                                                                  image: NetworkImage(reviewData[index].user!.fullImage!)))),
+                                                                  fit: BoxFit
+                                                                      .fitHeight,
+                                                                  image: NetworkImage(
+                                                                      reviewData[
+                                                                              index]
+                                                                          .user!
+                                                                          .fullImage!)))),
                                                     ),
                                                   ),
                                                   title: Row(
-                                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
                                                     children: [
                                                       Container(
-                                                        alignment: AlignmentDirectional.topStart,
+                                                        alignment:
+                                                            AlignmentDirectional
+                                                                .topStart,
                                                         margin: EdgeInsets.only(
                                                           top: height * 0.01,
                                                         ),
-                                                        child: Text(reviewData[index].user!.name!, style: TextStyle(fontSize: 16.0)),
+                                                        child: Text(
+                                                            reviewData[index]
+                                                                .user!
+                                                                .name!,
+                                                            style: TextStyle(
+                                                                fontSize:
+                                                                    16.0)),
                                                       ),
                                                       Container(
-                                                        child: RatingBarIndicator(
-                                                          rating: reviewData[index].rate!.toDouble(),
-                                                          itemBuilder: (context, index) => Icon(
+                                                        child:
+                                                            RatingBarIndicator(
+                                                          rating:
+                                                              reviewData[index]
+                                                                  .rate!
+                                                                  .toDouble(),
+                                                          itemBuilder: (context,
+                                                                  index) =>
+                                                              Icon(
                                                             Icons.star,
                                                             color: loginButton,
                                                           ),
                                                           itemCount: 5,
                                                           itemSize: 18.0,
-                                                          direction: Axis.horizontal,
+                                                          direction:
+                                                              Axis.horizontal,
                                                         ),
                                                       ),
                                                     ],
@@ -526,19 +696,31 @@ class _RateAndReviewScreenState extends State<RateAndReviewScreen> {
                                                   subtitle: Column(
                                                     children: <Widget>[
                                                       Container(
-                                                        alignment: AlignmentDirectional.topStart,
+                                                        alignment:
+                                                            AlignmentDirectional
+                                                                .topStart,
                                                         child: Text(
-                                                          reviewData[index].review!,
-                                                          style: TextStyle(fontSize: 12, color: passwordVisibility),
-                                                          overflow: TextOverflow.ellipsis,
+                                                          reviewData[index]
+                                                              .review!,
+                                                          style: TextStyle(
+                                                              fontSize: 12,
+                                                              color:
+                                                                  passwordVisibility),
+                                                          overflow: TextOverflow
+                                                              .ellipsis,
                                                           maxLines: 2,
                                                         ),
                                                       ),
                                                       Container(
-                                                          alignment: AlignmentDirectional.topStart,
+                                                          alignment:
+                                                              AlignmentDirectional
+                                                                  .topStart,
                                                           child: Text(
                                                             "$createDate",
-                                                            style: TextStyle(fontSize: 12, color: passwordVisibility),
+                                                            style: TextStyle(
+                                                                fontSize: 12,
+                                                                color:
+                                                                    passwordVisibility),
                                                           )),
                                                     ],
                                                   ),
@@ -563,7 +745,6 @@ class _RateAndReviewScreenState extends State<RateAndReviewScreen> {
   }
 
   Future<BaseModel<Review>> reviewrequset() async {
-
     Review response;
 
     try {
@@ -583,7 +764,10 @@ class _RateAndReviewScreenState extends State<RateAndReviewScreen> {
 
   Future<void> logoutUser() async {
     SharedPreferenceHelper.clearPref();
-    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (BuildContext context) => SignIn()), ModalRoute.withName('SignIn'));
+    Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (BuildContext context) => SignIn()),
+        ModalRoute.withName('SignIn'));
   }
 
   showAlertDialog(BuildContext context) {
@@ -633,7 +817,8 @@ class _RateAndReviewScreenState extends State<RateAndReviewScreen> {
     }
 
     _userReview.forEach((userName) {
-      if (userName.user!.name!.toLowerCase().contains(text.toLowerCase())) _searchResult.add(userName);
+      if (userName.user!.name!.toLowerCase().contains(text.toLowerCase()))
+        _searchResult.add(userName);
     });
 
     setState(() {});

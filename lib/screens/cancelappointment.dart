@@ -94,7 +94,8 @@ class _CancelAppointmentScreen extends State<CancelAppointmentScreen> {
       dname = SharedPreferenceHelper.getString(Preferences.name);
       dfullimage = SharedPreferenceHelper.getString(Preferences.image);
       phone = SharedPreferenceHelper.getString(Preferences.phone_no);
-      subscription = SharedPreferenceHelper.getInt(Preferences.subscription_status);
+      subscription =
+          SharedPreferenceHelper.getInt(Preferences.subscription_status);
     });
   }
 
@@ -112,7 +113,8 @@ class _CancelAppointmentScreen extends State<CancelAppointmentScreen> {
 
     return WillPopScope(
       onWillPop: () {
-        Navigator.pushNamedAndRemoveUntil(context, 'loginhome', (route) => false);
+        Navigator.pushNamedAndRemoveUntil(
+            context, 'loginhome', (route) => false);
         return Future<bool>.value(false);
       },
       child: RefreshIndicator(
@@ -133,16 +135,19 @@ class _CancelAppointmentScreen extends State<CancelAppointmentScreen> {
                           Container(
                             width: 80,
                             height: 80,
-                            decoration: new BoxDecoration(shape: BoxShape.circle, boxShadow: [
-                              new BoxShadow(
-                                color: imageBorder,
-                                blurRadius: 1.0,
-                              ),
-                            ]),
+                            decoration: new BoxDecoration(
+                                shape: BoxShape.circle,
+                                boxShadow: [
+                                  new BoxShadow(
+                                    color: imageBorder,
+                                    blurRadius: 1.0,
+                                  ),
+                                ]),
                             child: CachedNetworkImage(
                               alignment: Alignment.center,
                               imageUrl: '$dfullimage',
-                              imageBuilder: (context, imageProvider) => CircleAvatar(
+                              imageBuilder: (context, imageProvider) =>
+                                  CircleAvatar(
                                 radius: 50,
                                 backgroundColor: colorWhite,
                                 child: CircleAvatar(
@@ -150,10 +155,12 @@ class _CancelAppointmentScreen extends State<CancelAppointmentScreen> {
                                   backgroundImage: imageProvider,
                                 ),
                               ),
-                              placeholder: (context, url) => CircularProgressIndicator(
+                              placeholder: (context, url) =>
+                                  CircularProgressIndicator(
                                 color: ColorConstants.themeColor,
                               ),
-                              errorWidget: (context, url, error) => Image.asset("assets/images/no_image.jpg"),
+                              errorWidget: (context, url, error) =>
+                                  Image.asset("assets/images/no_image.jpg"),
                             ),
                           ),
                           Column(
@@ -166,12 +173,14 @@ class _CancelAppointmentScreen extends State<CancelAppointmentScreen> {
                                   '$dname',
                                   overflow: TextOverflow.ellipsis,
                                   maxLines: 1,
-                                  style: TextStyle(fontSize: 18, color: hintColor),
+                                  style:
+                                      TextStyle(fontSize: 18, color: hintColor),
                                 ),
                               ),
                               Text(
                                 "$phone",
-                                style: TextStyle(fontSize: 14, color: passwordVisibility),
+                                style: TextStyle(
+                                    fontSize: 14, color: passwordVisibility),
                               ),
                             ],
                           ),
@@ -192,85 +201,157 @@ class _CancelAppointmentScreen extends State<CancelAppointmentScreen> {
                     flex: 11,
                     child: subscription == -1
                         ? ListView.builder(
-                      physics: AlwaysScrollableScrollPhysics(),
-                      shrinkWrap: false,
-                      scrollDirection: Axis.vertical,
-                      itemCount: _drawerMenu.length,
-                      padding: EdgeInsets.zero,
-                      itemBuilder: (context, index) {
-                        return ListTile(
-                          onTap: () {
-                            if (_drawerMenu[index] == getTranslated(context, drawer_home).toString()) {
-                              Navigator.popAndPushNamed(context, "loginhome");
-                            } else if (_drawerMenu[index] == getTranslated(context, drawer_payments).toString()) {
-                              Navigator.popAndPushNamed(context, 'payment');
-                            } else if (_drawerMenu[index] == getTranslated(context, drawer_canceled_appointment).toString()) {
-                              Navigator.popAndPushNamed(context, 'cancelappoitment');
-                            } else if (_drawerMenu[index] == getTranslated(context, drawer_appointments).toString()) {
-                              Navigator.popAndPushNamed(context, 'AppointmentHistoryScreen');
-                            } else if (_drawerMenu[index] == getTranslated(context, drawer_review).toString()) {
-                              Navigator.popAndPushNamed(context, 'rateandreview');
-                            } else if (_drawerMenu[index] == getTranslated(context, drawer_notification).toString()) {
-                              Navigator.popAndPushNamed(context, 'notifications');
-                            } else if (_drawerMenu[index] == getTranslated(context, drawer_callHistory).toString()) {
-                              Navigator.popAndPushNamed(context, 'VideoCallHistory');
-                            } else if (_drawerMenu[index] == getTranslated(context, drawer_schedule_timing).toString()) {
-                              Navigator.popAndPushNamed(context, 'Schedule Timings');
-                            }else if (_drawerMenu[index] == getTranslated(context, drawer_setting).toString()) {
-                              Navigator.popAndPushNamed(context, 'Settings');
-                            } else if (_drawer[index] == getTranslated(context, chats).toString()) {
-                              Navigator.popAndPushNamed(context, 'ChatHome');
-                            } else if (_drawerMenu[index] == getTranslated(context, drawer_logout).toString()) {
-                              showAlertDialog(context);
-                            }
-                          },
-                          title: Text(
-                            _drawerMenu[index],
-                            style: TextStyle(color: hintColor),
-                          ),
-                        );
-                      },
-                    )
+                            physics: AlwaysScrollableScrollPhysics(),
+                            shrinkWrap: false,
+                            scrollDirection: Axis.vertical,
+                            itemCount: _drawerMenu.length,
+                            padding: EdgeInsets.zero,
+                            itemBuilder: (context, index) {
+                              return ListTile(
+                                onTap: () {
+                                  if (_drawerMenu[index] ==
+                                      getTranslated(context, drawer_home)
+                                          .toString()) {
+                                    Navigator.popAndPushNamed(
+                                        context, "loginhome");
+                                  } else if (_drawerMenu[index] ==
+                                      getTranslated(context, drawer_payments)
+                                          .toString()) {
+                                    Navigator.popAndPushNamed(
+                                        context, 'payment');
+                                  } else if (_drawerMenu[index] ==
+                                      getTranslated(context,
+                                              drawer_canceled_appointment)
+                                          .toString()) {
+                                    Navigator.popAndPushNamed(
+                                        context, 'cancelappoitment');
+                                  } else if (_drawerMenu[index] ==
+                                      getTranslated(
+                                              context, drawer_appointments)
+                                          .toString()) {
+                                    Navigator.popAndPushNamed(
+                                        context, 'AppointmentHistoryScreen');
+                                  } else if (_drawerMenu[index] ==
+                                      getTranslated(context, drawer_review)
+                                          .toString()) {
+                                    Navigator.popAndPushNamed(
+                                        context, 'rateandreview');
+                                  } else if (_drawerMenu[index] ==
+                                      getTranslated(
+                                              context, drawer_notification)
+                                          .toString()) {
+                                    Navigator.popAndPushNamed(
+                                        context, 'notifications');
+                                  } else if (_drawerMenu[index] ==
+                                      getTranslated(context, drawer_callHistory)
+                                          .toString()) {
+                                    Navigator.popAndPushNamed(
+                                        context, 'VideoCallHistory');
+                                  } else if (_drawerMenu[index] ==
+                                      getTranslated(
+                                              context, drawer_schedule_timing)
+                                          .toString()) {
+                                    Navigator.popAndPushNamed(
+                                        context, 'Schedule Timings');
+                                  } else if (_drawerMenu[index] ==
+                                      getTranslated(context, drawer_setting)
+                                          .toString()) {
+                                    Navigator.popAndPushNamed(
+                                        context, 'Settings');
+                                  } else if (_drawer[index] ==
+                                      getTranslated(context, chats)
+                                          .toString()) {
+                                    Navigator.popAndPushNamed(
+                                        context, 'ChatHome');
+                                  } else if (_drawerMenu[index] ==
+                                      getTranslated(context, drawer_logout)
+                                          .toString()) {
+                                    showAlertDialog(context);
+                                  }
+                                },
+                                title: Text(
+                                  _drawerMenu[index],
+                                  style: TextStyle(color: hintColor),
+                                ),
+                              );
+                            },
+                          )
                         : ListView.builder(
-                      physics: AlwaysScrollableScrollPhysics(),
-                      shrinkWrap: false,
-                      scrollDirection: Axis.vertical,
-                      itemCount: _drawer.length,
-                      padding: EdgeInsets.zero,
-                      itemBuilder: (context, index) {
-                        return ListTile(
-                          onTap: () {
-                            if (_drawer[index] == getTranslated(context, drawer_home).toString()) {
-                              Navigator.popAndPushNamed(context, "loginhome");
-                            } else if (_drawer[index] == getTranslated(context, drawer_payments).toString()) {
-                              Navigator.popAndPushNamed(context, 'payment');
-                            } else if (_drawer[index] == getTranslated(context, drawer_canceled_appointment).toString()) {
-                              Navigator.popAndPushNamed(context, 'cancelappoitment');
-                            } else if (_drawer[index] == getTranslated(context, drawer_appointments).toString()) {
-                              Navigator.popAndPushNamed(context, 'AppointmentHistoryScreen');
-                            } else if (_drawer[index] == getTranslated(context, drawer_review).toString()) {
-                              Navigator.popAndPushNamed(context, 'rateandreview');
-                            } else if (_drawer[index] == getTranslated(context, drawer_notification).toString()) {
-                              Navigator.popAndPushNamed(context, 'notifications');
-                            } else if (_drawer[index] == getTranslated(context, drawer_callHistory).toString()) {
-                              Navigator.popAndPushNamed(context, 'VideoCallHistory');
-                            } else if (_drawer[index] == getTranslated(context, drawer_schedule_timing).toString()) {
-                              Navigator.popAndPushNamed(context, 'Schedule Timings');
-                            }else if (_drawer[index] == getTranslated(context, drawer_setting).toString()) {
-                              Navigator.popAndPushNamed(context, 'Settings');
-                            } else if (_drawer[index] == getTranslated(context, chats).toString()) {
-                              Navigator.popAndPushNamed(context, 'ChatHome');
-                            } else if (_drawer[index] == getTranslated(context, drawer_logout).toString()) {
-                              showAlertDialog(context);
-                            }
-                          },
-                          title: Text(
-                            _drawer[index],
-                            style: TextStyle(color: hintColor),
+                            physics: AlwaysScrollableScrollPhysics(),
+                            shrinkWrap: false,
+                            scrollDirection: Axis.vertical,
+                            itemCount: _drawer.length,
+                            padding: EdgeInsets.zero,
+                            itemBuilder: (context, index) {
+                              return ListTile(
+                                onTap: () {
+                                  if (_drawer[index] ==
+                                      getTranslated(context, drawer_home)
+                                          .toString()) {
+                                    Navigator.popAndPushNamed(
+                                        context, "loginhome");
+                                  } else if (_drawer[index] ==
+                                      getTranslated(context, drawer_payments)
+                                          .toString()) {
+                                    Navigator.popAndPushNamed(
+                                        context, 'payment');
+                                  } else if (_drawer[index] ==
+                                      getTranslated(context,
+                                              drawer_canceled_appointment)
+                                          .toString()) {
+                                    Navigator.popAndPushNamed(
+                                        context, 'cancelappoitment');
+                                  } else if (_drawer[index] ==
+                                      getTranslated(
+                                              context, drawer_appointments)
+                                          .toString()) {
+                                    Navigator.popAndPushNamed(
+                                        context, 'AppointmentHistoryScreen');
+                                  } else if (_drawer[index] ==
+                                      getTranslated(context, drawer_review)
+                                          .toString()) {
+                                    Navigator.popAndPushNamed(
+                                        context, 'rateandreview');
+                                  } else if (_drawer[index] ==
+                                      getTranslated(
+                                              context, drawer_notification)
+                                          .toString()) {
+                                    Navigator.popAndPushNamed(
+                                        context, 'notifications');
+                                  } else if (_drawer[index] ==
+                                      getTranslated(context, drawer_callHistory)
+                                          .toString()) {
+                                    Navigator.popAndPushNamed(
+                                        context, 'VideoCallHistory');
+                                  } else if (_drawer[index] ==
+                                      getTranslated(
+                                              context, drawer_schedule_timing)
+                                          .toString()) {
+                                    Navigator.popAndPushNamed(
+                                        context, 'Schedule Timings');
+                                  } else if (_drawer[index] ==
+                                      getTranslated(context, drawer_setting)
+                                          .toString()) {
+                                    Navigator.popAndPushNamed(
+                                        context, 'Settings');
+                                  } else if (_drawer[index] ==
+                                      getTranslated(context, chats)
+                                          .toString()) {
+                                    Navigator.popAndPushNamed(
+                                        context, 'ChatHome');
+                                  } else if (_drawer[index] ==
+                                      getTranslated(context, drawer_logout)
+                                          .toString()) {
+                                    showAlertDialog(context);
+                                  }
+                                },
+                                title: Text(
+                                  _drawer[index],
+                                  style: TextStyle(color: hintColor),
+                                ),
+                              );
+                            },
                           ),
-                        );
-                      },
-                    ),
                   ),
                 ],
               ),
@@ -285,12 +366,14 @@ class _CancelAppointmentScreen extends State<CancelAppointmentScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Container(
-                          margin: EdgeInsets.only(left: width * 0.06, right: width * 0.06, top: height * 0.01),
+                          margin: EdgeInsets.only(
+                              left: width * 0.06,
+                              right: width * 0.06,
+                              top: height * 0.01),
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-
                               // SvgPicture.asset(
                               //   'assets/icons/location.svg',
                               // ),
@@ -300,11 +383,14 @@ class _CancelAppointmentScreen extends State<CancelAppointmentScreen> {
                                 children: [
                                   Container(
                                     child: Text(
-                                      getTranslated(context, cancel_appointment_heading).toString(),
-                                      style: TextStyle(fontSize: width * 0.05, color: hintColor),
+                                      getTranslated(context,
+                                              cancel_appointment_heading)
+                                          .toString(),
+                                      style: TextStyle(
+                                          fontSize: width * 0.05,
+                                          color: hintColor),
                                     ),
                                   ),
-
                                 ],
                               ),
                               Container(
@@ -335,7 +421,8 @@ class _CancelAppointmentScreen extends State<CancelAppointmentScreen> {
                         ),
                         child: Container(
                             alignment: AlignmentDirectional.center,
-                            margin: EdgeInsets.only(left: width * 0.05, right: width * 0.05),
+                            margin: EdgeInsets.only(
+                                left: width * 0.05, right: width * 0.05),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               crossAxisAlignment: CrossAxisAlignment.center,
@@ -347,7 +434,9 @@ class _CancelAppointmentScreen extends State<CancelAppointmentScreen> {
                                     controller: _search,
                                     decoration: InputDecoration(
                                       border: InputBorder.none,
-                                      hintText: getTranslated(context, search_cancel_appointment).toString(),
+                                      hintText: getTranslated(context,
+                                              search_cancel_appointment)
+                                          .toString(),
                                       hintStyle: TextStyle(
                                         fontSize: width * 0.045,
                                         color: hintColor.withOpacity(0.3),
@@ -384,19 +473,41 @@ class _CancelAppointmentScreen extends State<CancelAppointmentScreen> {
                           children: [
                             Container(
                               alignment: AlignmentDirectional.topStart,
-                              margin: EdgeInsets.only(left: width * 0.08, right: width * 0.08, top: height * 0.02),
+                              margin: EdgeInsets.only(
+                                  left: width * 0.08,
+                                  right: width * 0.08,
+                                  top: height * 0.02),
                               child: Text(
-                                getTranslated(context, cancel_appointment_heading).toString(),
-                                style: TextStyle(fontSize: width * 0.05, color: hintColor),
+                                getTranslated(
+                                        context, cancel_appointment_heading)
+                                    .toString(),
+                                style: TextStyle(
+                                    fontSize: width * 0.05, color: hintColor),
                               ),
                             ),
                             caneclappointmentreq.length == 0
                                 ? Container(
                                     margin: EdgeInsets.only(top: height * 0.2),
                                     child: Container(
-                                      child: Image.asset("assets/images/no-data.png"),
+                                      child: Center(
+                                        child: Column(
+                                          children: [
+                                            Image.asset(
+                                              "assets/images/noappointment.png",
+                                              height: 250,
+                                            ),
+                                            Text(
+                                              'No Cancellations Yet',
+                                              style: TextStyle(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
                                     ),
-                                  ) 
+                                  )
                                 : Container(
                                     color: divider,
                                     width: width * 1.0,
@@ -405,18 +516,28 @@ class _CancelAppointmentScreen extends State<CancelAppointmentScreen> {
                                     ),
                                     padding: EdgeInsets.all(15),
                                     child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
                                         Container(
-                                          margin: EdgeInsets.symmetric(horizontal: width * 0.04),
+                                          margin: EdgeInsets.symmetric(
+                                              horizontal: width * 0.04),
                                           child: Text(
-                                            getTranslated(context, cancel_appointment_heading).toString(),
-                                            style: TextStyle(fontSize: 16, color: hintColor),
+                                            getTranslated(context,
+                                                    cancel_appointment_heading)
+                                                .toString(),
+                                            style: TextStyle(
+                                                fontSize: 16, color: hintColor),
                                           ),
                                         ),
                                         Text(
-                                          getTranslated(context, cancel_appointment_length).toString() + " ${caneclappointmentreq.length} ",
-                                          style: TextStyle(fontSize: 13, color: passwordVisibility),
+                                          getTranslated(context,
+                                                      cancel_appointment_length)
+                                                  .toString() +
+                                              " ${caneclappointmentreq.length} ",
+                                          style: TextStyle(
+                                              fontSize: 13,
+                                              color: passwordVisibility),
                                         ),
                                       ],
                                     ),
@@ -434,79 +555,114 @@ class _CancelAppointmentScreen extends State<CancelAppointmentScreen> {
                                               Row(
                                                 children: [
                                                   Container(
-                                                    margin: EdgeInsets.only(left: width * 0.06, right: width * 0.02),
+                                                    margin: EdgeInsets.only(
+                                                        left: width * 0.06,
+                                                        right: width * 0.02),
                                                     child: Text(
                                                       _searchResult[i].time!,
-                                                      style: TextStyle(fontSize: 16, color: passwordVisibility),
+                                                      style: TextStyle(
+                                                          fontSize: 16,
+                                                          color:
+                                                              passwordVisibility),
                                                     ),
                                                   ),
                                                   Expanded(
                                                     child: Container(
-                                                        margin: EdgeInsets.only(left: width * 0.02, right: width * 0.02),
+                                                        margin: EdgeInsets.only(
+                                                            left: width * 0.02,
+                                                            right:
+                                                                width * 0.02),
                                                         height: 100,
                                                         child: Card(
-                                                            shape: RoundedRectangleBorder(
-                                                              borderRadius: BorderRadius.circular(15.0),
+                                                            shape:
+                                                                RoundedRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          15.0),
                                                             ),
-                                                            child: Column(children: <Widget>[
-                                                              Container(
-                                                                child: ListTile(
-                                                                  isThreeLine: true,
-                                                                  leading: SizedBox(
-                                                                    height: 70,
-                                                                    width: 60,
-                                                                    child: ClipRRect(
-                                                                      borderRadius: BorderRadius.circular(10),
-                                                                      child: Container(
-                                                                          decoration: new BoxDecoration(
-                                                                              image: new DecorationImage(
-                                                                                  fit: BoxFit.fitHeight,
-                                                                                  image: NetworkImage(_searchResult[i].user!.fullImage!)))),
-                                                                    ),
-                                                                  ),
-                                                                  title: Container(
-                                                                    alignment: AlignmentDirectional.topStart,
-                                                                    margin: EdgeInsets.only(
-                                                                      top: height * 0.01,
-                                                                    ),
-                                                                    child: Text(
-                                                                      _searchResult[i].patientName!,
-                                                                      style: TextStyle(fontSize: 16.0),
-                                                                      overflow: TextOverflow.ellipsis,
-                                                                      maxLines: 1,
-                                                                    ),
-                                                                  ),
-                                                                  trailing: Container(
-                                                                      child: Text(
-                                                                    SharedPreferenceHelper.getString(Preferences.currency_symbol) +
-                                                                        _searchResult[i].amount.toString(),
-                                                                    style: TextStyle(fontSize: 16, color: hintColor),
-                                                                  )),
-                                                                  subtitle: Column(
-                                                                    children: <Widget>[
-                                                                      Container(
-                                                                          alignment: AlignmentDirectional.topStart,
-                                                                          child: Text(
-                                                                            getTranslated(context, home_age_data).toString() +
-                                                                                ":" +
-                                                                                _searchResult[i].age.toString(),
-                                                                            style: TextStyle(fontSize: 12, color: hintColor),
-                                                                          )),
-                                                                      Container(
-                                                                        width: width * 0.6,
-                                                                        alignment: AlignmentDirectional.topStart,
-                                                                        child: Text(
-                                                                          _searchResult[i].patientAddress!,
-                                                                          style: TextStyle(fontSize: 12, color: passwordVisibility),
-                                                                          overflow: TextOverflow.ellipsis,
-                                                                          maxLines: 2,
+                                                            child: Column(
+                                                                children: <
+                                                                    Widget>[
+                                                                  Container(
+                                                                    child:
+                                                                        ListTile(
+                                                                      isThreeLine:
+                                                                          true,
+                                                                      leading:
+                                                                          SizedBox(
+                                                                        height:
+                                                                            70,
+                                                                        width:
+                                                                            60,
+                                                                        child:
+                                                                            ClipRRect(
+                                                                          borderRadius:
+                                                                              BorderRadius.circular(10),
+                                                                          child:
+                                                                              Container(decoration: new BoxDecoration(image: new DecorationImage(fit: BoxFit.fitHeight, image: NetworkImage(_searchResult[i].user!.fullImage!)))),
                                                                         ),
                                                                       ),
-                                                                    ],
-                                                                  ),
-                                                                ),
-                                                              )
-                                                            ]))),
+                                                                      title:
+                                                                          Container(
+                                                                        alignment:
+                                                                            AlignmentDirectional.topStart,
+                                                                        margin:
+                                                                            EdgeInsets.only(
+                                                                          top: height *
+                                                                              0.01,
+                                                                        ),
+                                                                        child:
+                                                                            Text(
+                                                                          _searchResult[i]
+                                                                              .patientName!,
+                                                                          style:
+                                                                              TextStyle(fontSize: 16.0),
+                                                                          overflow:
+                                                                              TextOverflow.ellipsis,
+                                                                          maxLines:
+                                                                              1,
+                                                                        ),
+                                                                      ),
+                                                                      trailing:
+                                                                          Container(
+                                                                              child: Text(
+                                                                        SharedPreferenceHelper.getString(Preferences.currency_symbol) +
+                                                                            _searchResult[i].amount.toString(),
+                                                                        style: TextStyle(
+                                                                            fontSize:
+                                                                                16,
+                                                                            color:
+                                                                                hintColor),
+                                                                      )),
+                                                                      subtitle:
+                                                                          Column(
+                                                                        children: <
+                                                                            Widget>[
+                                                                          Container(
+                                                                              alignment: AlignmentDirectional.topStart,
+                                                                              child: Text(
+                                                                                getTranslated(context, home_age_data).toString() + ":" + _searchResult[i].age.toString(),
+                                                                                style: TextStyle(fontSize: 12, color: hintColor),
+                                                                              )),
+                                                                          Container(
+                                                                            width:
+                                                                                width * 0.6,
+                                                                            alignment:
+                                                                                AlignmentDirectional.topStart,
+                                                                            child:
+                                                                                Text(
+                                                                              _searchResult[i].patientAddress!,
+                                                                              style: TextStyle(fontSize: 12, color: passwordVisibility),
+                                                                              overflow: TextOverflow.ellipsis,
+                                                                              maxLines: 2,
+                                                                            ),
+                                                                          ),
+                                                                        ],
+                                                                      ),
+                                                                    ),
+                                                                  )
+                                                                ]))),
                                                   ),
                                                 ],
                                               ),
@@ -518,8 +674,11 @@ class _CancelAppointmentScreen extends State<CancelAppointmentScreen> {
                                         height: height / 1.5,
                                         child: Center(
                                             child: Container(
-                                          margin: EdgeInsets.only(top: height * 0.02),
-                                          child: Text(getTranslated(context, result_not_found).toString()),
+                                          margin: EdgeInsets.only(
+                                              top: height * 0.02),
+                                          child: Text(getTranslated(
+                                                  context, result_not_found)
+                                              .toString()),
                                         )))
                                 : ListView.builder(
                                     itemCount: caneclappointmentreq.length,
@@ -533,78 +692,128 @@ class _CancelAppointmentScreen extends State<CancelAppointmentScreen> {
                                           Row(
                                             children: [
                                               Container(
-                                                margin: EdgeInsets.only(left: width * 0.06, right: width * 0.02),
+                                                margin: EdgeInsets.only(
+                                                    left: width * 0.06,
+                                                    right: width * 0.02),
                                                 child: Text(
-                                                  caneclappointmentreq[index].time!,
-                                                  style: TextStyle(fontSize: 16, color: passwordVisibility),
+                                                  caneclappointmentreq[index]
+                                                      .time!,
+                                                  style: TextStyle(
+                                                      fontSize: 16,
+                                                      color:
+                                                          passwordVisibility),
                                                 ),
                                               ),
                                               Expanded(
                                                 child: Container(
-                                                    margin: EdgeInsets.only(left: width * 0.02, right: width * 0.02),
+                                                    margin: EdgeInsets.only(
+                                                        left: width * 0.02,
+                                                        right: width * 0.02),
                                                     height: 100,
                                                     child: Card(
-                                                        shape: RoundedRectangleBorder(
-                                                          borderRadius: BorderRadius.circular(15.0),
+                                                        shape:
+                                                            RoundedRectangleBorder(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      15.0),
                                                         ),
-                                                        child: Column(children: <Widget>[
-                                                          Container(
-                                                            child: ListTile(
-                                                              isThreeLine: true,
-                                                              leading: SizedBox(
-                                                                height: 70,
-                                                                width: 60,
-                                                                child: ClipRRect(
-                                                                  borderRadius: BorderRadius.circular(10),
-                                                                  child: Container(
-                                                                      decoration: new BoxDecoration(
-                                                                          image: new DecorationImage(
-                                                                              fit: BoxFit.fitHeight,
-                                                                              image: NetworkImage(
-                                                                                  caneclappointmentreq[index].user!.fullImage!)))),
-                                                                ),
-                                                              ),
-                                                              title: Container(
-                                                                alignment: AlignmentDirectional.topStart,
-                                                                margin: EdgeInsets.only(
-                                                                  top: height * 0.01,
-                                                                ),
-                                                                child: Text(caneclappointmentreq[index].patientName!,
-                                                                    style: TextStyle(fontSize: 16.0),
-                                                                    overflow: TextOverflow.ellipsis,
-                                                                    maxLines: 1),
-                                                              ),
-                                                              trailing: Container(
-                                                                  child: Text(
-                                                                SharedPreferenceHelper.getString(Preferences.currency_symbol) +
-                                                                    caneclappointmentreq[index].amount.toString(),
-                                                                style: TextStyle(fontSize: 16, color: hintColor),
-                                                              )),
-                                                              subtitle: Column(
-                                                                children: <Widget>[
-                                                                  Container(
-                                                                      alignment: AlignmentDirectional.topStart,
-                                                                      child: Text(
-                                                                        getTranslated(context, home_age_data).toString() +
-                                                                            ":" +
-                                                                            caneclappointmentreq[index].age.toString(),
-                                                                        style: TextStyle(fontSize: 12, color: hintColor),
-                                                                      )),
-                                                                  Container(
-                                                                    width: width * 0.6,
-                                                                    alignment: AlignmentDirectional.topStart,
-                                                                    child: Text(
-                                                                      caneclappointmentreq[index].patientAddress!,
-                                                                      style: TextStyle(fontSize: 12, color: passwordVisibility),
-                                                                      overflow: TextOverflow.ellipsis,
-                                                                      maxLines: 2,
+                                                        child: Column(
+                                                            children: <Widget>[
+                                                              Container(
+                                                                child: ListTile(
+                                                                  isThreeLine:
+                                                                      true,
+                                                                  leading:
+                                                                      SizedBox(
+                                                                    height: 70,
+                                                                    width: 60,
+                                                                    child:
+                                                                        ClipRRect(
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              10),
+                                                                      child: Container(
+                                                                          decoration:
+                                                                              new BoxDecoration(image: new DecorationImage(fit: BoxFit.fitHeight, image: NetworkImage(caneclappointmentreq[index].user!.fullImage!)))),
                                                                     ),
                                                                   ),
-                                                                ],
-                                                              ),
-                                                            ),
-                                                          )
-                                                        ]))),
+                                                                  title:
+                                                                      Container(
+                                                                    alignment:
+                                                                        AlignmentDirectional
+                                                                            .topStart,
+                                                                    margin:
+                                                                        EdgeInsets
+                                                                            .only(
+                                                                      top: height *
+                                                                          0.01,
+                                                                    ),
+                                                                    child: Text(
+                                                                        caneclappointmentreq[index]
+                                                                            .patientName!,
+                                                                        style: TextStyle(
+                                                                            fontSize:
+                                                                                16.0),
+                                                                        overflow:
+                                                                            TextOverflow
+                                                                                .ellipsis,
+                                                                        maxLines:
+                                                                            1),
+                                                                  ),
+                                                                  trailing:
+                                                                      Container(
+                                                                          child:
+                                                                              Text(
+                                                                    SharedPreferenceHelper.getString(Preferences
+                                                                            .currency_symbol) +
+                                                                        caneclappointmentreq[index]
+                                                                            .amount
+                                                                            .toString(),
+                                                                    style: TextStyle(
+                                                                        fontSize:
+                                                                            16,
+                                                                        color:
+                                                                            hintColor),
+                                                                  )),
+                                                                  subtitle:
+                                                                      Column(
+                                                                    children: <
+                                                                        Widget>[
+                                                                      Container(
+                                                                          alignment: AlignmentDirectional
+                                                                              .topStart,
+                                                                          child:
+                                                                              Text(
+                                                                            getTranslated(context, home_age_data).toString() +
+                                                                                ":" +
+                                                                                caneclappointmentreq[index].age.toString(),
+                                                                            style:
+                                                                                TextStyle(fontSize: 12, color: hintColor),
+                                                                          )),
+                                                                      Container(
+                                                                        width: width *
+                                                                            0.6,
+                                                                        alignment:
+                                                                            AlignmentDirectional.topStart,
+                                                                        child:
+                                                                            Text(
+                                                                          caneclappointmentreq[index]
+                                                                              .patientAddress!,
+                                                                          style: TextStyle(
+                                                                              fontSize: 12,
+                                                                              color: passwordVisibility),
+                                                                          overflow:
+                                                                              TextOverflow.ellipsis,
+                                                                          maxLines:
+                                                                              2,
+                                                                        ),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                              )
+                                                            ]))),
                                               ),
                                             ],
                                           ),
@@ -617,7 +826,8 @@ class _CancelAppointmentScreen extends State<CancelAppointmentScreen> {
                     ),
                   );
                 } else {
-                  return Center(child: CircularProgressIndicator(
+                  return Center(
+                      child: CircularProgressIndicator(
                     color: ColorConstants.themeColor,
                   ));
                 }
@@ -641,7 +851,8 @@ class _CancelAppointmentScreen extends State<CancelAppointmentScreen> {
     try {
       caneclappointmentreq.clear();
       _userCancel.clear();
-      response = await RestClient(RetroApi().dioData()).cancelappointmentrequest();
+      response =
+          await RestClient(RetroApi().dioData()).cancelappointmentrequest();
       setState(() {
         caneclappointmentreq.addAll(response.data!);
         _userCancel.addAll(response.data!);
@@ -699,7 +910,9 @@ class _CancelAppointmentScreen extends State<CancelAppointmentScreen> {
       return;
     }
     _userCancel.forEach((appointmentCancel) {
-      if (appointmentCancel.patientName!.toLowerCase().contains(text.toLowerCase())) {
+      if (appointmentCancel.patientName!
+          .toLowerCase()
+          .contains(text.toLowerCase())) {
         _searchResult.add(appointmentCancel);
       }
     });

@@ -97,7 +97,8 @@ class _PaymentScreen extends State<PaymentScreen> {
       dname = SharedPreferenceHelper.getString(Preferences.name);
       dfullimage = SharedPreferenceHelper.getString(Preferences.image);
       phone = SharedPreferenceHelper.getString(Preferences.phone_no);
-      subscription = SharedPreferenceHelper.getInt(Preferences.subscription_status);
+      subscription =
+          SharedPreferenceHelper.getInt(Preferences.subscription_status);
     });
   }
 
@@ -114,14 +115,15 @@ class _PaymentScreen extends State<PaymentScreen> {
 
     return WillPopScope(
       onWillPop: () {
-        Navigator.pushNamedAndRemoveUntil(context, 'loginhome', (route) => false);
+        Navigator.pushNamedAndRemoveUntil(
+            context, 'loginhome', (route) => false);
         return Future<bool>.value(false);
       },
       child: RefreshIndicator(
         onRefresh: paymentsfunction,
         child: Scaffold(
           key: _scaffoldKey,
-          drawer:  Drawer(
+          drawer: Drawer(
             child: Container(
               child: Column(
                 children: [
@@ -135,16 +137,19 @@ class _PaymentScreen extends State<PaymentScreen> {
                           Container(
                             width: 80,
                             height: 80,
-                            decoration: new BoxDecoration(shape: BoxShape.circle, boxShadow: [
-                              new BoxShadow(
-                                color: imageBorder,
-                                blurRadius: 1.0,
-                              ),
-                            ]),
+                            decoration: new BoxDecoration(
+                                shape: BoxShape.circle,
+                                boxShadow: [
+                                  new BoxShadow(
+                                    color: imageBorder,
+                                    blurRadius: 1.0,
+                                  ),
+                                ]),
                             child: CachedNetworkImage(
                               alignment: Alignment.center,
                               imageUrl: '$dfullimage',
-                              imageBuilder: (context, imageProvider) => CircleAvatar(
+                              imageBuilder: (context, imageProvider) =>
+                                  CircleAvatar(
                                 radius: 50,
                                 backgroundColor: colorWhite,
                                 child: CircleAvatar(
@@ -152,10 +157,12 @@ class _PaymentScreen extends State<PaymentScreen> {
                                   backgroundImage: imageProvider,
                                 ),
                               ),
-                              placeholder: (context, url) => CircularProgressIndicator(
+                              placeholder: (context, url) =>
+                                  CircularProgressIndicator(
                                 color: ColorConstants.themeColor,
                               ),
-                              errorWidget: (context, url, error) => Image.asset("assets/images/no_image.jpg"),
+                              errorWidget: (context, url, error) =>
+                                  Image.asset("assets/images/no_image.jpg"),
                             ),
                           ),
                           Column(
@@ -168,12 +175,14 @@ class _PaymentScreen extends State<PaymentScreen> {
                                   '$dname',
                                   overflow: TextOverflow.ellipsis,
                                   maxLines: 1,
-                                  style: TextStyle(fontSize: 18, color: hintColor),
+                                  style:
+                                      TextStyle(fontSize: 18, color: hintColor),
                                 ),
                               ),
                               Text(
                                 "$phone",
-                                style: TextStyle(fontSize: 14, color: passwordVisibility),
+                                style: TextStyle(
+                                    fontSize: 14, color: passwordVisibility),
                               ),
                             ],
                           ),
@@ -194,85 +203,157 @@ class _PaymentScreen extends State<PaymentScreen> {
                     flex: 11,
                     child: subscription == -1
                         ? ListView.builder(
-                      physics: AlwaysScrollableScrollPhysics(),
-                      shrinkWrap: false,
-                      scrollDirection: Axis.vertical,
-                      itemCount: _drawerMenu.length,
-                      padding: EdgeInsets.zero,
-                      itemBuilder: (context, index) {
-                        return ListTile(
-                          onTap: () {
-                            if (_drawerMenu[index] == getTranslated(context, drawer_home).toString()) {
-                              Navigator.popAndPushNamed(context, "loginhome");
-                            } else if (_drawerMenu[index] == getTranslated(context, drawer_payments).toString()) {
-                              Navigator.popAndPushNamed(context, 'payment');
-                            } else if (_drawerMenu[index] == getTranslated(context, drawer_canceled_appointment).toString()) {
-                              Navigator.popAndPushNamed(context, 'cancelappoitment');
-                            } else if (_drawerMenu[index] == getTranslated(context, drawer_appointments).toString()) {
-                              Navigator.popAndPushNamed(context, 'AppointmentHistoryScreen');
-                            } else if (_drawerMenu[index] == getTranslated(context, drawer_review).toString()) {
-                              Navigator.popAndPushNamed(context, 'rateandreview');
-                            } else if (_drawerMenu[index] == getTranslated(context, drawer_notification).toString()) {
-                              Navigator.popAndPushNamed(context, 'notifications');
-                            } else if (_drawerMenu[index] == getTranslated(context, drawer_callHistory).toString()) {
-                              Navigator.popAndPushNamed(context, 'VideoCallHistory');
-                            } else if (_drawerMenu[index] == getTranslated(context, drawer_schedule_timing).toString()) {
-                              Navigator.popAndPushNamed(context, 'Schedule Timings');
-                            }else if (_drawerMenu[index] == getTranslated(context, drawer_setting).toString()) {
-                              Navigator.popAndPushNamed(context, 'Settings');
-                            } else if (_drawer[index] == getTranslated(context, chats).toString()) {
-                              Navigator.popAndPushNamed(context, 'ChatHome');
-                            } else if (_drawerMenu[index] == getTranslated(context, drawer_logout).toString()) {
-                              showAlertDialog(context);
-                            }
-                          },
-                          title: Text(
-                            _drawerMenu[index],
-                            style: TextStyle(color: hintColor),
-                          ),
-                        );
-                      },
-                    )
+                            physics: AlwaysScrollableScrollPhysics(),
+                            shrinkWrap: false,
+                            scrollDirection: Axis.vertical,
+                            itemCount: _drawerMenu.length,
+                            padding: EdgeInsets.zero,
+                            itemBuilder: (context, index) {
+                              return ListTile(
+                                onTap: () {
+                                  if (_drawerMenu[index] ==
+                                      getTranslated(context, drawer_home)
+                                          .toString()) {
+                                    Navigator.popAndPushNamed(
+                                        context, "loginhome");
+                                  } else if (_drawerMenu[index] ==
+                                      getTranslated(context, drawer_payments)
+                                          .toString()) {
+                                    Navigator.popAndPushNamed(
+                                        context, 'payment');
+                                  } else if (_drawerMenu[index] ==
+                                      getTranslated(context,
+                                              drawer_canceled_appointment)
+                                          .toString()) {
+                                    Navigator.popAndPushNamed(
+                                        context, 'cancelappoitment');
+                                  } else if (_drawerMenu[index] ==
+                                      getTranslated(
+                                              context, drawer_appointments)
+                                          .toString()) {
+                                    Navigator.popAndPushNamed(
+                                        context, 'AppointmentHistoryScreen');
+                                  } else if (_drawerMenu[index] ==
+                                      getTranslated(context, drawer_review)
+                                          .toString()) {
+                                    Navigator.popAndPushNamed(
+                                        context, 'rateandreview');
+                                  } else if (_drawerMenu[index] ==
+                                      getTranslated(
+                                              context, drawer_notification)
+                                          .toString()) {
+                                    Navigator.popAndPushNamed(
+                                        context, 'notifications');
+                                  } else if (_drawerMenu[index] ==
+                                      getTranslated(context, drawer_callHistory)
+                                          .toString()) {
+                                    Navigator.popAndPushNamed(
+                                        context, 'VideoCallHistory');
+                                  } else if (_drawerMenu[index] ==
+                                      getTranslated(
+                                              context, drawer_schedule_timing)
+                                          .toString()) {
+                                    Navigator.popAndPushNamed(
+                                        context, 'Schedule Timings');
+                                  } else if (_drawerMenu[index] ==
+                                      getTranslated(context, drawer_setting)
+                                          .toString()) {
+                                    Navigator.popAndPushNamed(
+                                        context, 'Settings');
+                                  } else if (_drawer[index] ==
+                                      getTranslated(context, chats)
+                                          .toString()) {
+                                    Navigator.popAndPushNamed(
+                                        context, 'ChatHome');
+                                  } else if (_drawerMenu[index] ==
+                                      getTranslated(context, drawer_logout)
+                                          .toString()) {
+                                    showAlertDialog(context);
+                                  }
+                                },
+                                title: Text(
+                                  _drawerMenu[index],
+                                  style: TextStyle(color: hintColor),
+                                ),
+                              );
+                            },
+                          )
                         : ListView.builder(
-                      physics: AlwaysScrollableScrollPhysics(),
-                      shrinkWrap: false,
-                      scrollDirection: Axis.vertical,
-                      itemCount: _drawer.length,
-                      padding: EdgeInsets.zero,
-                      itemBuilder: (context, index) {
-                        return ListTile(
-                          onTap: () {
-                            if (_drawer[index] == getTranslated(context, drawer_home).toString()) {
-                              Navigator.popAndPushNamed(context, "loginhome");
-                            } else if (_drawer[index] == getTranslated(context, drawer_payments).toString()) {
-                              Navigator.popAndPushNamed(context, 'payment');
-                            } else if (_drawer[index] == getTranslated(context, drawer_canceled_appointment).toString()) {
-                              Navigator.popAndPushNamed(context, 'cancelappoitment');
-                            } else if (_drawer[index] == getTranslated(context, drawer_appointments).toString()) {
-                              Navigator.popAndPushNamed(context, 'AppointmentHistoryScreen');
-                            } else if (_drawer[index] == getTranslated(context, drawer_review).toString()) {
-                              Navigator.popAndPushNamed(context, 'rateandreview');
-                            } else if (_drawer[index] == getTranslated(context, drawer_notification).toString()) {
-                              Navigator.popAndPushNamed(context, 'notifications');
-                            } else if (_drawer[index] == getTranslated(context, drawer_callHistory).toString()) {
-                              Navigator.popAndPushNamed(context, 'VideoCallHistory');
-                            } else if (_drawer[index] == getTranslated(context, drawer_schedule_timing).toString()) {
-                              Navigator.popAndPushNamed(context, 'Schedule Timings');
-                            }else if (_drawer[index] == getTranslated(context, drawer_setting).toString()) {
-                              Navigator.popAndPushNamed(context, 'Settings');
-                            } else if (_drawer[index] == getTranslated(context, chats).toString()) {
-                              Navigator.popAndPushNamed(context, 'ChatHome');
-                            } else if (_drawer[index] == getTranslated(context, drawer_logout).toString()) {
-                              showAlertDialog(context);
-                            }
-                          },
-                          title: Text(
-                            _drawer[index],
-                            style: TextStyle(color: hintColor),
+                            physics: AlwaysScrollableScrollPhysics(),
+                            shrinkWrap: false,
+                            scrollDirection: Axis.vertical,
+                            itemCount: _drawer.length,
+                            padding: EdgeInsets.zero,
+                            itemBuilder: (context, index) {
+                              return ListTile(
+                                onTap: () {
+                                  if (_drawer[index] ==
+                                      getTranslated(context, drawer_home)
+                                          .toString()) {
+                                    Navigator.popAndPushNamed(
+                                        context, "loginhome");
+                                  } else if (_drawer[index] ==
+                                      getTranslated(context, drawer_payments)
+                                          .toString()) {
+                                    Navigator.popAndPushNamed(
+                                        context, 'payment');
+                                  } else if (_drawer[index] ==
+                                      getTranslated(context,
+                                              drawer_canceled_appointment)
+                                          .toString()) {
+                                    Navigator.popAndPushNamed(
+                                        context, 'cancelappoitment');
+                                  } else if (_drawer[index] ==
+                                      getTranslated(
+                                              context, drawer_appointments)
+                                          .toString()) {
+                                    Navigator.popAndPushNamed(
+                                        context, 'AppointmentHistoryScreen');
+                                  } else if (_drawer[index] ==
+                                      getTranslated(context, drawer_review)
+                                          .toString()) {
+                                    Navigator.popAndPushNamed(
+                                        context, 'rateandreview');
+                                  } else if (_drawer[index] ==
+                                      getTranslated(
+                                              context, drawer_notification)
+                                          .toString()) {
+                                    Navigator.popAndPushNamed(
+                                        context, 'notifications');
+                                  } else if (_drawer[index] ==
+                                      getTranslated(context, drawer_callHistory)
+                                          .toString()) {
+                                    Navigator.popAndPushNamed(
+                                        context, 'VideoCallHistory');
+                                  } else if (_drawer[index] ==
+                                      getTranslated(
+                                              context, drawer_schedule_timing)
+                                          .toString()) {
+                                    Navigator.popAndPushNamed(
+                                        context, 'Schedule Timings');
+                                  } else if (_drawer[index] ==
+                                      getTranslated(context, drawer_setting)
+                                          .toString()) {
+                                    Navigator.popAndPushNamed(
+                                        context, 'Settings');
+                                  } else if (_drawer[index] ==
+                                      getTranslated(context, chats)
+                                          .toString()) {
+                                    Navigator.popAndPushNamed(
+                                        context, 'ChatHome');
+                                  } else if (_drawer[index] ==
+                                      getTranslated(context, drawer_logout)
+                                          .toString()) {
+                                    showAlertDialog(context);
+                                  }
+                                },
+                                title: Text(
+                                  _drawer[index],
+                                  style: TextStyle(color: hintColor),
+                                ),
+                              );
+                            },
                           ),
-                        );
-                      },
-                    ),
                   ),
                 ],
               ),
@@ -287,12 +368,14 @@ class _PaymentScreen extends State<PaymentScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Container(
-                          margin: EdgeInsets.only(left: width * 0.06, right: width * 0.04, top: height * 0.01),
+                          margin: EdgeInsets.only(
+                              left: width * 0.06,
+                              right: width * 0.04,
+                              top: height * 0.01),
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-
                               // SvgPicture.asset(
                               //   'assets/icons/location.svg',
                               // ),
@@ -302,8 +385,11 @@ class _PaymentScreen extends State<PaymentScreen> {
                                 children: [
                                   Container(
                                     child: Text(
-                                      getTranslated(context, payment_title).toString(),
-                                      style: TextStyle(fontSize: width * 0.05, color: hintColor),
+                                      getTranslated(context, payment_title)
+                                          .toString(),
+                                      style: TextStyle(
+                                          fontSize: width * 0.05,
+                                          color: hintColor),
                                     ),
                                   ),
                                 ],
@@ -337,7 +423,8 @@ class _PaymentScreen extends State<PaymentScreen> {
                         ),
                         child: Container(
                             alignment: AlignmentDirectional.center,
-                            margin: EdgeInsets.only(left: width * 0.05, right: width * 0.05),
+                            margin: EdgeInsets.only(
+                                left: width * 0.05, right: width * 0.05),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               crossAxisAlignment: CrossAxisAlignment.center,
@@ -349,7 +436,9 @@ class _PaymentScreen extends State<PaymentScreen> {
                                     controller: _search,
                                     decoration: InputDecoration(
                                       border: InputBorder.none,
-                                      hintText: getTranslated(context, payment_search).toString(),
+                                      hintText:
+                                          getTranslated(context, payment_search)
+                                              .toString(),
                                       hintStyle: TextStyle(
                                         fontSize: width * 0.045,
                                         color: hintColor.withOpacity(0.3),
@@ -370,7 +459,7 @@ class _PaymentScreen extends State<PaymentScreen> {
                       ),
                     ),
                   ]))),
-            body: FutureBuilder(
+          body: FutureBuilder(
               future: payments,
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.done) {
@@ -383,7 +472,6 @@ class _PaymentScreen extends State<PaymentScreen> {
                       physics: AlwaysScrollableScrollPhysics(),
                       child: Column(
                         children: [
-
                           // Container(
                           //   alignment: AlignmentDirectional.topStart,
                           //   margin: EdgeInsets.only(left: width * 0.06, right: width * 0.06, top: height * 0.02),
@@ -398,22 +486,48 @@ class _PaymentScreen extends State<PaymentScreen> {
                                   child: Container(
                                     margin: EdgeInsets.only(top: height * 0.2),
                                     child: Container(
-                                      child: Image.asset("assets/images/no-data.png"),
+                                      child: Column(
+                                        children: [
+                                          Image.asset(
+                                            "assets/images/nothing.png",
+                                            height: 250,
+                                          ),
+                                          Text(
+                                            'Nothing Found',
+                                            style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 )
                               : Container(
-                                  margin: EdgeInsets.only(left: width * 0.06, right: width * 0.06, top: height * 0.020),
+                                  margin: EdgeInsets.only(
+                                      left: width * 0.06,
+                                      right: width * 0.06,
+                                      top: height * 0.020),
                                   child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
-                                        getTranslated(context, payment_patient_list).toString(),
-                                        style: TextStyle(fontSize: width * 0.05, color: hintColor),
+                                        getTranslated(
+                                                context, payment_patient_list)
+                                            .toString(),
+                                        style: TextStyle(
+                                            fontSize: width * 0.05,
+                                            color: hintColor),
                                       ),
                                       Text(
-                                        getTranslated(context, payment_total).toString() + " ${paymentsreq.length}",
-                                        style: TextStyle(fontSize: width * 0.030, color: passwordVisibility),
+                                        getTranslated(context, payment_total)
+                                                .toString() +
+                                            " ${paymentsreq.length}",
+                                        style: TextStyle(
+                                            fontSize: width * 0.030,
+                                            color: passwordVisibility),
                                       ),
                                     ],
                                   ),
@@ -428,24 +542,44 @@ class _PaymentScreen extends State<PaymentScreen> {
                                         return Column(
                                           children: [
                                             Container(
-                                              margin: EdgeInsets.only(left: width * 0.06, top: height * 0.04, right: width * 0.06),
+                                              margin: EdgeInsets.only(
+                                                  left: width * 0.06,
+                                                  top: height * 0.04,
+                                                  right: width * 0.06),
                                               child: Row(
-                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
                                                 children: [
                                                   Text(
-                                                    _searchResult[i].user!.name!,
-                                                    style: TextStyle(fontSize: 14, color: passwordVisibility),
+                                                    _searchResult[i]
+                                                        .user!
+                                                        .name!,
+                                                    style: TextStyle(
+                                                        fontSize: 14,
+                                                        color:
+                                                            passwordVisibility),
                                                   ),
                                                   Text(
-                                                    SharedPreferenceHelper.getString(Preferences.currency_symbol) +
-                                                        _searchResult[i].amount.toString(),
-                                                    style: TextStyle(fontSize: 14, color: passwordVisibility),
+                                                    SharedPreferenceHelper
+                                                            .getString(Preferences
+                                                                .currency_symbol) +
+                                                        _searchResult[i]
+                                                            .amount
+                                                            .toString(),
+                                                    style: TextStyle(
+                                                        fontSize: 14,
+                                                        color:
+                                                            passwordVisibility),
                                                   ),
                                                 ],
                                               ),
                                             ),
                                             Container(
-                                              margin: EdgeInsets.only(left: width * 0.06, right: width * 0.06, top: height * 0.02),
+                                              margin: EdgeInsets.only(
+                                                  left: width * 0.06,
+                                                  right: width * 0.06,
+                                                  top: height * 0.02),
                                               child: Divider(
                                                 height: height * 0.005,
                                                 thickness: width * 0.005,
@@ -458,38 +592,58 @@ class _PaymentScreen extends State<PaymentScreen> {
                                     )
                                   : Center(
                                       child: Container(
-                                      margin: EdgeInsets.only(top: height * 0.02),
+                                      margin:
+                                          EdgeInsets.only(top: height * 0.02),
                                       child: Text(
-                                        getTranslated(context, result_not_found).toString(),
+                                        getTranslated(context, result_not_found)
+                                            .toString(),
                                       ),
                                     ))
                               : ListView.builder(
                                   physics: NeverScrollableScrollPhysics(),
                                   shrinkWrap: true,
                                   scrollDirection: Axis.vertical,
-                                  itemCount: _patmentreq == false && paymentsreq.length > 5 ? 5 : paymentsreq.length,
+                                  itemCount: _patmentreq == false &&
+                                          paymentsreq.length > 5
+                                      ? 5
+                                      : paymentsreq.length,
                                   itemBuilder: (context, index) {
                                     return Column(
                                       children: [
                                         Container(
-                                          margin: EdgeInsets.only(left: width * 0.06, top: height * 0.04, right: width * 0.06),
+                                          margin: EdgeInsets.only(
+                                              left: width * 0.06,
+                                              top: height * 0.04,
+                                              right: width * 0.06),
                                           child: Row(
-                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
                                             children: [
                                               Text(
                                                 paymentsreq[index].user!.name!,
-                                                style: TextStyle(fontSize: 14, color: passwordVisibility),
+                                                style: TextStyle(
+                                                    fontSize: 14,
+                                                    color: passwordVisibility),
                                               ),
                                               Text(
-                                                SharedPreferenceHelper.getString(Preferences.currency_symbol) +
-                                                    paymentsreq[index].amount.toString(),
-                                                style: TextStyle(fontSize: 14, color: passwordVisibility),
+                                                SharedPreferenceHelper
+                                                        .getString(Preferences
+                                                            .currency_symbol) +
+                                                    paymentsreq[index]
+                                                        .amount
+                                                        .toString(),
+                                                style: TextStyle(
+                                                    fontSize: 14,
+                                                    color: passwordVisibility),
                                               ),
                                             ],
                                           ),
                                         ),
                                         Container(
-                                          margin: EdgeInsets.only(left: width * 0.06, right: width * 0.06, top: height * 0.02),
+                                          margin: EdgeInsets.only(
+                                              left: width * 0.06,
+                                              right: width * 0.06,
+                                              top: height * 0.02),
                                           child: Divider(
                                             height: height * 0.005,
                                             thickness: width * 0.005,
@@ -511,22 +665,33 @@ class _PaymentScreen extends State<PaymentScreen> {
                                       });
                                     },
                                     child: Container(
-                                      margin: EdgeInsets.only(top: height * 0.02),
-                                      alignment: AlignmentDirectional.centerStart,
+                                      margin:
+                                          EdgeInsets.only(top: height * 0.02),
+                                      alignment:
+                                          AlignmentDirectional.centerStart,
                                       height: height * 0.07,
                                       width: width * 0.88,
                                       color: divider,
                                       child: Container(
-                                        margin: EdgeInsets.only(left: width * 0.02, right: width * 0.02),
+                                        margin: EdgeInsets.only(
+                                            left: width * 0.02,
+                                            right: width * 0.02),
                                         child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
                                           children: [
                                             Text(
-                                              getTranslated(context, view_all_payment).toString(),
-                                              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: hintColor),
+                                              getTranslated(
+                                                      context, view_all_payment)
+                                                  .toString(),
+                                              style: TextStyle(
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.w500,
+                                                  color: hintColor),
                                             ),
                                             Container(
-                                              margin: EdgeInsets.only(right: width * 0.4),
+                                              margin: EdgeInsets.only(
+                                                  right: width * 0.4),
                                               child: SvgPicture.asset(
                                                 'assets/icons/longarrow.svg',
                                                 height: height * 0.012,
@@ -534,7 +699,10 @@ class _PaymentScreen extends State<PaymentScreen> {
                                             ),
                                             Text(
                                               "${paymentsreq.length}",
-                                              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: hintColor),
+                                              style: TextStyle(
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.w500,
+                                                  color: hintColor),
                                             ),
                                           ],
                                         ),
@@ -550,17 +718,26 @@ class _PaymentScreen extends State<PaymentScreen> {
                                   margin: EdgeInsets.only(top: height * 0.04),
                                   color: loginButton,
                                   child: Container(
-                                    margin: EdgeInsets.only(left: width * 0.06, right: width * 0.06),
+                                    margin: EdgeInsets.only(
+                                        left: width * 0.06,
+                                        right: width * 0.06),
                                     child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
-                                          getTranslated(context, payment_rs_total).toString(),
-                                          style: TextStyle(fontSize: 16, color: colorWhite),
+                                          getTranslated(
+                                                  context, payment_rs_total)
+                                              .toString(),
+                                          style: TextStyle(
+                                              fontSize: 16, color: colorWhite),
                                         ),
                                         Text(
-                                          SharedPreferenceHelper.getString(Preferences.currency_symbol) + "$sum",
-                                          style: TextStyle(fontSize: 16, color: colorWhite),
+                                          SharedPreferenceHelper.getString(
+                                                  Preferences.currency_symbol) +
+                                              "$sum",
+                                          style: TextStyle(
+                                              fontSize: 16, color: colorWhite),
                                         ),
                                       ],
                                     ),
@@ -585,7 +762,10 @@ class _PaymentScreen extends State<PaymentScreen> {
 
   Future<void> logoutUser() async {
     SharedPreferenceHelper.clearPref();
-    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (BuildContext context) => SignIn()), ModalRoute.withName('SignIn'));
+    Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (BuildContext context) => SignIn()),
+        ModalRoute.withName('SignIn'));
   }
 
   Future<BaseModel<Payment>> paymentsfunction() async {
@@ -681,7 +861,8 @@ class _PaymentScreen extends State<PaymentScreen> {
     }
 
     _userPayment.forEach((payment) {
-      if (payment.user!.name!.toLowerCase().contains(text.toLowerCase())) _searchResult.add(payment);
+      if (payment.user!.name!.toLowerCase().contains(text.toLowerCase()))
+        _searchResult.add(payment);
     });
     setState(() {});
   }

@@ -35,8 +35,8 @@ class LoginHome extends StatefulWidget {
   final String? chat;
 
   LoginHome({
-   this.chat,
-});
+    this.chat,
+  });
 
   @override
   _LoginHomeState createState() => _LoginHomeState();
@@ -109,8 +109,6 @@ class _LoginHomeState extends State<LoginHome> {
     ];
   }
 
-
-
   @override
   void initState() {
     super.initState();
@@ -120,23 +118,25 @@ class _LoginHomeState extends State<LoginHome> {
         .then((RemoteMessage? message) {
       if (message != null) {
         Map<String, dynamic> dataValue = message.data;
-        messageImage=dataValue['userImage'].toString();
-        messageName=dataValue['userName'].toString();
+        messageImage = dataValue['userImage'].toString();
+        messageName = dataValue['userName'].toString();
         messageId = dataValue['userId'].toString();
         userToken = dataValue['userToken'].toString();
 
-        if(widget.chat == ""){
+        if (widget.chat == "") {
           if (SharedPreferenceHelper.getString(Preferences.email).isNotEmpty) {
-            Navigator.of(navigatorKey.currentContext!).pushReplacement(MaterialPageRoute(
-                builder: (context) => ChatPage(
-                      peerNickname: messageName,
-                      peerAvatar: messageImage,
-                      peerId: messageId,
-                      token: userToken,
-                      isNavigate: '',
-                    )));
+            Navigator.of(navigatorKey.currentContext!)
+                .pushReplacement(MaterialPageRoute(
+                    builder: (context) => ChatPage(
+                          peerNickname: messageName,
+                          peerAvatar: messageImage,
+                          peerId: messageId,
+                          token: userToken,
+                          isNavigate: '',
+                        )));
           } else {
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SignIn()));
+            Navigator.pushReplacement(
+                context, MaterialPageRoute(builder: (context) => SignIn()));
           }
         }
       }
@@ -147,20 +147,22 @@ class _LoginHomeState extends State<LoginHome> {
         dname = SharedPreferenceHelper.getString(Preferences.name);
         dfullimage = SharedPreferenceHelper.getString(Preferences.image);
         isfilled = SharedPreferenceHelper.getInt(Preferences.is_filled);
-        subscription = SharedPreferenceHelper.getInt(Preferences.subscription_status);
+        subscription =
+            SharedPreferenceHelper.getInt(Preferences.subscription_status);
         phone = SharedPreferenceHelper.getString(Preferences.phone_no);
       });
 
-      Future.delayed(Duration(seconds: 5),(){
-        homeProvider.updateDataFirestore(FirestoreConstants.pathUserCollection, FirebaseAuth.instance.currentUser!.uid, {'pushToken': SharedPreferenceHelper.getString(Preferences.messageToken)});
-
+      Future.delayed(Duration(seconds: 5), () {
+        homeProvider.updateDataFirestore(FirestoreConstants.pathUserCollection,
+            FirebaseAuth.instance.currentUser!.uid, {
+          'pushToken':
+              SharedPreferenceHelper.getString(Preferences.messageToken)
+        });
       });
-
     });
 
-    authProvider = Provider.of<AuthProvider>(context,listen: false);
-    homeProvider = Provider.of<HomeProvider>(context,listen: false);
-
+    authProvider = Provider.of<AuthProvider>(context, listen: false);
+    homeProvider = Provider.of<HomeProvider>(context, listen: false);
   }
 
   //Set Double Tap to exit value //
@@ -169,9 +171,12 @@ class _LoginHomeState extends State<LoginHome> {
   //Set Double Tap exit //
   Future<bool> onWillPop() {
     DateTime now = DateTime.now();
-    if (currentBackPressTime == null || now.difference(currentBackPressTime!) > Duration(seconds: 2)) {
+    if (currentBackPressTime == null ||
+        now.difference(currentBackPressTime!) > Duration(seconds: 2)) {
       currentBackPressTime = now;
-      Fluttertoast.showToast(gravity: ToastGravity.BOTTOM, msg: getTranslated(context, tap_again_to_exit_app).toString());
+      Fluttertoast.showToast(
+          gravity: ToastGravity.BOTTOM,
+          msg: getTranslated(context, tap_again_to_exit_app).toString());
       return Future.value(false);
     }
     return Future.value(true);
@@ -186,8 +191,6 @@ class _LoginHomeState extends State<LoginHome> {
 
   @override
   Widget build(BuildContext context) {
-
-
     width = MediaQuery.of(context).size.width;
     height = MediaQuery.of(context).size.height;
 
@@ -209,16 +212,19 @@ class _LoginHomeState extends State<LoginHome> {
                         Container(
                           width: 80,
                           height: 80,
-                          decoration: new BoxDecoration(shape: BoxShape.circle, boxShadow: [
-                            new BoxShadow(
-                              color: imageBorder,
-                              blurRadius: 1.0,
-                            ),
-                          ]),
+                          decoration: new BoxDecoration(
+                              shape: BoxShape.circle,
+                              boxShadow: [
+                                new BoxShadow(
+                                  color: imageBorder,
+                                  blurRadius: 1.0,
+                                ),
+                              ]),
                           child: CachedNetworkImage(
                             alignment: Alignment.center,
                             imageUrl: '$dfullimage',
-                            imageBuilder: (context, imageProvider) => CircleAvatar(
+                            imageBuilder: (context, imageProvider) =>
+                                CircleAvatar(
                               radius: 50,
                               backgroundColor: colorWhite,
                               child: CircleAvatar(
@@ -226,10 +232,12 @@ class _LoginHomeState extends State<LoginHome> {
                                 backgroundImage: imageProvider,
                               ),
                             ),
-                            placeholder: (context, url) => CircularProgressIndicator(
+                            placeholder: (context, url) =>
+                                CircularProgressIndicator(
                               color: ColorConstants.themeColor,
                             ),
-                            errorWidget: (context, url, error) => Image.asset("assets/images/no_image.jpg"),
+                            errorWidget: (context, url, error) =>
+                                Image.asset("assets/images/no_image.jpg"),
                           ),
                         ),
                         Column(
@@ -242,12 +250,14 @@ class _LoginHomeState extends State<LoginHome> {
                                 '$dname',
                                 overflow: TextOverflow.ellipsis,
                                 maxLines: 1,
-                                style: TextStyle(fontSize: 18, color: hintColor),
+                                style:
+                                    TextStyle(fontSize: 18, color: hintColor),
                               ),
                             ),
                             Text(
                               "$phone",
-                              style: TextStyle(fontSize: 14, color: passwordVisibility),
+                              style: TextStyle(
+                                  fontSize: 14, color: passwordVisibility),
                             ),
                           ],
                         ),
@@ -276,27 +286,59 @@ class _LoginHomeState extends State<LoginHome> {
                           itemBuilder: (context, index) {
                             return ListTile(
                               onTap: () {
-                                if (_drawerMenu[index] == getTranslated(context, drawer_home).toString()) {
-                                  Navigator.popAndPushNamed(context, "loginhome");
-                                } else if (_drawerMenu[index] == getTranslated(context, drawer_payments).toString()) {
+                                if (_drawerMenu[index] ==
+                                    getTranslated(context, drawer_home)
+                                        .toString()) {
+                                  Navigator.popAndPushNamed(
+                                      context, "loginhome");
+                                } else if (_drawerMenu[index] ==
+                                    getTranslated(context, drawer_payments)
+                                        .toString()) {
                                   Navigator.popAndPushNamed(context, 'payment');
-                                } else if (_drawerMenu[index] == getTranslated(context, drawer_canceled_appointment).toString()) {
-                                  Navigator.popAndPushNamed(context, 'cancelappoitment');
-                                } else if (_drawerMenu[index] == getTranslated(context, drawer_appointments).toString()) {
-                                  Navigator.popAndPushNamed(context, 'AppointmentHistoryScreen');
-                                } else if (_drawerMenu[index] == getTranslated(context, drawer_review).toString()) {
-                                  Navigator.popAndPushNamed(context, 'rateandreview');
-                                } else if (_drawerMenu[index] == getTranslated(context, drawer_notification).toString()) {
-                                  Navigator.popAndPushNamed(context, 'notifications');
-                                } else if (_drawerMenu[index] == getTranslated(context, drawer_callHistory).toString()) {
-                                  Navigator.popAndPushNamed(context, 'VideoCallHistory');
-                                } else if (_drawerMenu[index] == getTranslated(context, drawer_schedule_timing).toString()) {
-                                  Navigator.popAndPushNamed(context, 'Schedule Timings');
-                                }else if (_drawerMenu[index] == getTranslated(context, drawer_setting).toString()) {
-                                  Navigator.popAndPushNamed(context, 'Settings');
-                                } else if (_drawer[index] == getTranslated(context, chats).toString()) {
-                                  Navigator.popAndPushNamed(context, 'ChatHome');
-                                } else if (_drawerMenu[index] == getTranslated(context, drawer_logout).toString()) {
+                                } else if (_drawerMenu[index] ==
+                                    getTranslated(context,
+                                            drawer_canceled_appointment)
+                                        .toString()) {
+                                  Navigator.popAndPushNamed(
+                                      context, 'cancelappoitment');
+                                } else if (_drawerMenu[index] ==
+                                    getTranslated(context, drawer_appointments)
+                                        .toString()) {
+                                  Navigator.popAndPushNamed(
+                                      context, 'AppointmentHistoryScreen');
+                                } else if (_drawerMenu[index] ==
+                                    getTranslated(context, drawer_review)
+                                        .toString()) {
+                                  Navigator.popAndPushNamed(
+                                      context, 'rateandreview');
+                                } else if (_drawerMenu[index] ==
+                                    getTranslated(context, drawer_notification)
+                                        .toString()) {
+                                  Navigator.popAndPushNamed(
+                                      context, 'notifications');
+                                } else if (_drawerMenu[index] ==
+                                    getTranslated(context, drawer_callHistory)
+                                        .toString()) {
+                                  Navigator.popAndPushNamed(
+                                      context, 'VideoCallHistory');
+                                } else if (_drawerMenu[index] ==
+                                    getTranslated(
+                                            context, drawer_schedule_timing)
+                                        .toString()) {
+                                  Navigator.popAndPushNamed(
+                                      context, 'Schedule Timings');
+                                } else if (_drawerMenu[index] ==
+                                    getTranslated(context, drawer_setting)
+                                        .toString()) {
+                                  Navigator.popAndPushNamed(
+                                      context, 'Settings');
+                                } else if (_drawer[index] ==
+                                    getTranslated(context, chats).toString()) {
+                                  Navigator.popAndPushNamed(
+                                      context, 'ChatHome');
+                                } else if (_drawerMenu[index] ==
+                                    getTranslated(context, drawer_logout)
+                                        .toString()) {
                                   showAlertDialog(context);
                                 }
                               },
@@ -316,27 +358,59 @@ class _LoginHomeState extends State<LoginHome> {
                           itemBuilder: (context, index) {
                             return ListTile(
                               onTap: () {
-                                if (_drawer[index] == getTranslated(context, drawer_home).toString()) {
-                                  Navigator.popAndPushNamed(context, "loginhome");
-                                } else if (_drawer[index] == getTranslated(context, drawer_payments).toString()) {
+                                if (_drawer[index] ==
+                                    getTranslated(context, drawer_home)
+                                        .toString()) {
+                                  Navigator.popAndPushNamed(
+                                      context, "loginhome");
+                                } else if (_drawer[index] ==
+                                    getTranslated(context, drawer_payments)
+                                        .toString()) {
                                   Navigator.popAndPushNamed(context, 'payment');
-                                } else if (_drawer[index] == getTranslated(context, drawer_canceled_appointment).toString()) {
-                                  Navigator.popAndPushNamed(context, 'cancelappoitment');
-                                } else if (_drawer[index] == getTranslated(context, drawer_appointments).toString()) {
-                                  Navigator.popAndPushNamed(context, 'AppointmentHistoryScreen');
-                                } else if (_drawer[index] == getTranslated(context, drawer_review).toString()) {
-                                  Navigator.popAndPushNamed(context, 'rateandreview');
-                                } else if (_drawer[index] == getTranslated(context, drawer_notification).toString()) {
-                                  Navigator.popAndPushNamed(context, 'notifications');
-                                } else if (_drawer[index] == getTranslated(context, drawer_callHistory).toString()) {
-                                  Navigator.popAndPushNamed(context, 'VideoCallHistory');
-                                } else if (_drawer[index] == getTranslated(context, drawer_schedule_timing).toString()) {
-                                  Navigator.popAndPushNamed(context, 'Schedule Timings');
-                                }else if (_drawer[index] == getTranslated(context, drawer_setting).toString()) {
-                                  Navigator.popAndPushNamed(context, 'Settings');
-                                } else if (_drawer[index] == getTranslated(context, chats).toString()) {
-                                  Navigator.popAndPushNamed(context, 'ChatHome');
-                                } else if (_drawer[index] == getTranslated(context, drawer_logout).toString()) {
+                                } else if (_drawer[index] ==
+                                    getTranslated(context,
+                                            drawer_canceled_appointment)
+                                        .toString()) {
+                                  Navigator.popAndPushNamed(
+                                      context, 'cancelappoitment');
+                                } else if (_drawer[index] ==
+                                    getTranslated(context, drawer_appointments)
+                                        .toString()) {
+                                  Navigator.popAndPushNamed(
+                                      context, 'AppointmentHistoryScreen');
+                                } else if (_drawer[index] ==
+                                    getTranslated(context, drawer_review)
+                                        .toString()) {
+                                  Navigator.popAndPushNamed(
+                                      context, 'rateandreview');
+                                } else if (_drawer[index] ==
+                                    getTranslated(context, drawer_notification)
+                                        .toString()) {
+                                  Navigator.popAndPushNamed(
+                                      context, 'notifications');
+                                } else if (_drawer[index] ==
+                                    getTranslated(context, drawer_callHistory)
+                                        .toString()) {
+                                  Navigator.popAndPushNamed(
+                                      context, 'VideoCallHistory');
+                                } else if (_drawer[index] ==
+                                    getTranslated(
+                                            context, drawer_schedule_timing)
+                                        .toString()) {
+                                  Navigator.popAndPushNamed(
+                                      context, 'Schedule Timings');
+                                } else if (_drawer[index] ==
+                                    getTranslated(context, drawer_setting)
+                                        .toString()) {
+                                  Navigator.popAndPushNamed(
+                                      context, 'Settings');
+                                } else if (_drawer[index] ==
+                                    getTranslated(context, chats).toString()) {
+                                  Navigator.popAndPushNamed(
+                                      context, 'ChatHome');
+                                } else if (_drawer[index] ==
+                                    getTranslated(context, drawer_logout)
+                                        .toString()) {
                                   showAlertDialog(context);
                                 }
                               },
@@ -361,13 +435,19 @@ class _LoginHomeState extends State<LoginHome> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Container(
-                        margin: EdgeInsets.only(left: width * 0.06, right: width * 0.04, top: height * 0.01),
+                        margin: EdgeInsets.only(
+                            left: width * 0.06,
+                            right: width * 0.04,
+                            top: height * 0.01),
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Container(
-                              child: Text( getTranslated(context, home_title).toString(), style: TextStyle(fontSize: 18, color: hintColor)),
+                              child: Text(
+                                  getTranslated(context, home_title).toString(),
+                                  style: TextStyle(
+                                      fontSize: 18, color: hintColor)),
                             ),
                             Container(
                               margin: EdgeInsets.only(),
@@ -398,7 +478,8 @@ class _LoginHomeState extends State<LoginHome> {
                       child: Container(
                           height: height * 0.06,
                           alignment: AlignmentDirectional.center,
-                          margin: EdgeInsets.only(left: width * 0.05, right: width * 0.05),
+                          margin: EdgeInsets.only(
+                              left: width * 0.05, right: width * 0.05),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.center,
@@ -410,7 +491,9 @@ class _LoginHomeState extends State<LoginHome> {
                                   controller: _search,
                                   decoration: InputDecoration(
                                     border: InputBorder.none,
-                                    hintText: getTranslated(context, home_search_hint).toString(),
+                                    hintText:
+                                        getTranslated(context, home_search_hint)
+                                            .toString(),
                                     hintStyle: TextStyle(
                                       fontSize: width * 0.045,
                                       color: hintColor.withOpacity(0.3),
@@ -453,11 +536,15 @@ class _LoginHomeState extends State<LoginHome> {
                                 children: [
                                   isfilled == 0
                                       ? GestureDetector(
-                                          onTap: () => Navigator.pushNamed(context, "profile"),
+                                          onTap: () => Navigator.pushNamed(
+                                              context, "profile"),
                                           child: Container(
                                             width: width * 1.0,
                                             color: tabBar.withOpacity(0.8),
-                                            margin: EdgeInsets.only(left: width * 0.06, right: width * 0.06, bottom: height * 0.02),
+                                            margin: EdgeInsets.only(
+                                                left: width * 0.06,
+                                                right: width * 0.06,
+                                                bottom: height * 0.02),
                                             child: Column(
                                               children: [
                                                 Row(
@@ -473,13 +560,28 @@ class _LoginHomeState extends State<LoginHome> {
                                                       ),
                                                     ),
                                                     Container(
-                                                        margin: EdgeInsets.only(left: width * 0.02),
-                                                        child: Text(getTranslated(context, home_please_update_profile).toString(),
-                                                            style: TextStyle(fontSize: 16, color: purple))),
+                                                        margin: EdgeInsets.only(
+                                                            left: width * 0.02),
+                                                        child: Text(
+                                                            getTranslated(
+                                                                    context,
+                                                                    home_please_update_profile)
+                                                                .toString(),
+                                                            style: TextStyle(
+                                                                fontSize: 16,
+                                                                color:
+                                                                    purple))),
                                                     Container(
-                                                        margin: EdgeInsets.only(left: width * 0.03),
-                                                        child: Text(getTranslated(context, home_click_here).toString(),
-                                                            style: TextStyle(fontSize: 16, color: purple)))
+                                                        margin: EdgeInsets.only(
+                                                            left: width * 0.03),
+                                                        child: Text(
+                                                            getTranslated(
+                                                                    context,
+                                                                    home_click_here)
+                                                                .toString(),
+                                                            style: TextStyle(
+                                                                fontSize: 16,
+                                                                color: purple)))
                                                   ],
                                                 )
                                               ],
@@ -492,22 +594,34 @@ class _LoginHomeState extends State<LoginHome> {
                                     width: width * 1.0,
                                     child: Container(
                                       height: height * 0.05,
-                                      margin: EdgeInsets.only(left: width * 0.06, right: width * 0.08),
+                                      margin: EdgeInsets.only(
+                                          left: width * 0.06,
+                                          right: width * 0.08),
                                       child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
                                         children: [
                                           Text(
-                                            getTranslated(context, home_title).toString(),
-                                            style: TextStyle(fontSize: 18, color: hintColor),
+                                            getTranslated(context, home_title)
+                                                .toString(),
+                                            style: TextStyle(
+                                                fontSize: 18, color: hintColor),
                                           ),
                                           GestureDetector(
-                                            onTap: () => Navigator.pushNamed(context, "ViewAllAppointment"),
-                                            child: todayappointmentsreq.length < 5
+                                            onTap: () => Navigator.pushNamed(
+                                                context, "ViewAllAppointment"),
+                                            child: todayappointmentsreq.length <
+                                                    5
                                                 ? Container()
                                                 : Container(
                                                     child: Text(
-                                                      getTranslated(context, home_show_all).toString(),
-                                                      style: TextStyle(fontSize: width * 0.035, color: loginButton),
+                                                      getTranslated(context,
+                                                              home_show_all)
+                                                          .toString(),
+                                                      style: TextStyle(
+                                                          fontSize:
+                                                              width * 0.035,
+                                                          color: loginButton),
                                                     ),
                                                   ),
                                           )
@@ -518,9 +632,25 @@ class _LoginHomeState extends State<LoginHome> {
                                   todayappointmentsreq.length == 0
                                       ? Center(
                                           child: Container(
-                                            margin: EdgeInsets.only(top: height * 0.2),
+                                            margin: EdgeInsets.only(
+                                                top: height * 0.2),
                                             child: Container(
-                                              child: Image.asset("assets/images/no-data.png"),
+                                              child: Column(
+                                                children: [
+                                                  Image.asset(
+                                                    "assets/images/nothing.png",
+                                                    height: 250,
+                                                  ),
+                                                  Text(
+                                                    'Nothing Found',
+                                                    style: TextStyle(
+                                                      fontSize: 16,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
                                             ),
                                           ),
                                         )
@@ -528,98 +658,107 @@ class _LoginHomeState extends State<LoginHome> {
                                           ? _searchResult.length > 0
                                               ? ListView.builder(
                                                   shrinkWrap: true,
-                                                  physics: NeverScrollableScrollPhysics(),
-                                                  itemCount: _searchResult.length,
+                                                  physics:
+                                                      NeverScrollableScrollPhysics(),
+                                                  itemCount:
+                                                      _searchResult.length,
                                                   itemBuilder: (context, i) {
                                                     return Column(
                                                       children: [
                                                         Row(
                                                           children: [
                                                             Container(
-                                                              margin: EdgeInsets.only(left: width * 0.06, right: width * 0.02),
+                                                              margin: EdgeInsets.only(
+                                                                  left: width *
+                                                                      0.06,
+                                                                  right: width *
+                                                                      0.02),
                                                               child: Text(
-                                                                _searchResult[i].time!,
-                                                                style: TextStyle(fontSize: 16, color: passwordVisibility),
+                                                                _searchResult[i]
+                                                                    .time!,
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        16,
+                                                                    color:
+                                                                        passwordVisibility),
                                                               ),
                                                             ),
                                                             Expanded(
                                                               child: Container(
-                                                                  margin: EdgeInsets.only(left: width * 0.02, right: width * 0.02),
+                                                                  margin: EdgeInsets.only(
+                                                                      left: width *
+                                                                          0.02,
+                                                                      right: width *
+                                                                          0.02),
                                                                   height: 100,
-                                                                  width: width * 0.70,
-                                                                  child: GestureDetector(
+                                                                  width: width *
+                                                                      0.70,
+                                                                  child:
+                                                                      GestureDetector(
                                                                     onTap: () {
                                                                       Navigator.push(
                                                                           context,
                                                                           MaterialPageRoute(
-                                                                              builder: (context) =>
-                                                                                  PatientInformationScreen(id: _searchResult[i].id)));
+                                                                              builder: (context) => PatientInformationScreen(id: _searchResult[i].id)));
                                                                     },
                                                                     child: Card(
-                                                                        shape: RoundedRectangleBorder(
-                                                                          borderRadius: BorderRadius.circular(15.0),
+                                                                        shape:
+                                                                            RoundedRectangleBorder(
+                                                                          borderRadius:
+                                                                              BorderRadius.circular(15.0),
                                                                         ),
-                                                                        child: Column(children: <Widget>[
-                                                                          Container(
-                                                                            child: ListTile(
-                                                                                isThreeLine: true,
-                                                                              leading: SizedBox(
-                                                                                height: height * 0.20,
-                                                                                width: width * 0.15,
-                                                                                child: ClipRRect(
-                                                                                  borderRadius: BorderRadius.circular(10),
-                                                                                  child: Container(
-                                                                                      decoration: new BoxDecoration(
-                                                                                          image: new DecorationImage(
-                                                                                              fit: BoxFit.fitHeight,
-                                                                                              image: NetworkImage(
-                                                                                                  _searchResult[i].user!.fullImage!)))),
-                                                                                ),
-                                                                              ),
-                                                                              title: Container(
-                                                                                alignment: AlignmentDirectional.topStart,
-                                                                                margin: EdgeInsets.only(
-                                                                                  top: height * 0.01,
-                                                                                ),
-                                                                                child: Text(
-                                                                                  _searchResult[i].patientName!,
-                                                                                  style: TextStyle(fontSize: 16.0),
-                                                                                  overflow: TextOverflow.ellipsis,
-                                                                                  maxLines: 1,
-                                                                                ),
-                                                                              ),
-                                                                              trailing: Container(
-                                                                                  child: Text(
-                                                                                SharedPreferenceHelper.getString(
-                                                                                        Preferences.currency_symbol) +
-                                                                                    _searchResult[i].amount.toString(),
-                                                                                style: TextStyle(fontSize: 16, color: hintColor),
-                                                                              )),
-                                                                              subtitle: Column(
-                                                                                children: <Widget>[
-                                                                                  Container(
-                                                                                      alignment: AlignmentDirectional.topStart,
-                                                                                      child: Text(
-                                                                                        getTranslated(context, home_age_data).toString() +
-                                                                                            ":" +
-                                                                                            _searchResult[i].age.toString(),
-                                                                                        style: TextStyle(fontSize: 12, color: hintColor),
-                                                                                      )),
-                                                                                  Container(
-                                                                                    alignment: AlignmentDirectional.topStart,
-                                                                                    child: Text(
-                                                                                      _searchResult[i].patientAddress!,
-                                                                                      style:
-                                                                                          TextStyle(fontSize: 12, color: passwordVisibility),
-                                                                                      overflow: TextOverflow.ellipsis,
-                                                                                      maxLines: 2,
+                                                                        child: Column(
+                                                                            children: <Widget>[
+                                                                              Container(
+                                                                                child: ListTile(
+                                                                                  isThreeLine: true,
+                                                                                  leading: SizedBox(
+                                                                                    height: height * 0.20,
+                                                                                    width: width * 0.15,
+                                                                                    child: ClipRRect(
+                                                                                      borderRadius: BorderRadius.circular(10),
+                                                                                      child: Container(decoration: new BoxDecoration(image: new DecorationImage(fit: BoxFit.fitHeight, image: NetworkImage(_searchResult[i].user!.fullImage!)))),
                                                                                     ),
                                                                                   ),
-                                                                                ],
-                                                                              ),
-                                                                            ),
-                                                                          )
-                                                                        ])),
+                                                                                  title: Container(
+                                                                                    alignment: AlignmentDirectional.topStart,
+                                                                                    margin: EdgeInsets.only(
+                                                                                      top: height * 0.01,
+                                                                                    ),
+                                                                                    child: Text(
+                                                                                      _searchResult[i].patientName!,
+                                                                                      style: TextStyle(fontSize: 16.0),
+                                                                                      overflow: TextOverflow.ellipsis,
+                                                                                      maxLines: 1,
+                                                                                    ),
+                                                                                  ),
+                                                                                  trailing: Container(
+                                                                                      child: Text(
+                                                                                    SharedPreferenceHelper.getString(Preferences.currency_symbol) + _searchResult[i].amount.toString(),
+                                                                                    style: TextStyle(fontSize: 16, color: hintColor),
+                                                                                  )),
+                                                                                  subtitle: Column(
+                                                                                    children: <Widget>[
+                                                                                      Container(
+                                                                                          alignment: AlignmentDirectional.topStart,
+                                                                                          child: Text(
+                                                                                            getTranslated(context, home_age_data).toString() + ":" + _searchResult[i].age.toString(),
+                                                                                            style: TextStyle(fontSize: 12, color: hintColor),
+                                                                                          )),
+                                                                                      Container(
+                                                                                        alignment: AlignmentDirectional.topStart,
+                                                                                        child: Text(
+                                                                                          _searchResult[i].patientAddress!,
+                                                                                          style: TextStyle(fontSize: 12, color: passwordVisibility),
+                                                                                          overflow: TextOverflow.ellipsis,
+                                                                                          maxLines: 2,
+                                                                                        ),
+                                                                                      ),
+                                                                                    ],
+                                                                                  ),
+                                                                                ),
+                                                                              )
+                                                                            ])),
                                                                   )),
                                                             ),
                                                           ],
@@ -631,30 +770,55 @@ class _LoginHomeState extends State<LoginHome> {
                                               : Container(
                                                   height: height / 1.5,
                                                   child: Center(
-                                                      child: Container(child: Text(getTranslated(context, result_not_found).toString()))))
+                                                      child: Container(
+                                                          child: Text(getTranslated(
+                                                                  context,
+                                                                  result_not_found)
+                                                              .toString()))))
                                           : ListView.builder(
-                                              physics: NeverScrollableScrollPhysics(),
+                                              physics:
+                                                  NeverScrollableScrollPhysics(),
                                               shrinkWrap: true,
                                               scrollDirection: Axis.vertical,
-                                              itemCount: 5 < todayappointmentsreq.length ? 5 : todayappointmentsreq.length,
+                                              itemCount: 5 <
+                                                      todayappointmentsreq
+                                                          .length
+                                                  ? 5
+                                                  : todayappointmentsreq.length,
                                               itemBuilder: (context, index) {
                                                 return Column(
                                                   children: [
                                                     Row(
                                                       children: [
                                                         Container(
-                                                          margin: EdgeInsets.only(left: width * 0.06, right: width * 0.02),
+                                                          margin:
+                                                              EdgeInsets.only(
+                                                                  left: width *
+                                                                      0.06,
+                                                                  right: width *
+                                                                      0.02),
                                                           child: Text(
-                                                            todayappointmentsreq[index].time!,
-                                                            style: TextStyle(fontSize: 16, color: passwordVisibility),
+                                                            todayappointmentsreq[
+                                                                    index]
+                                                                .time!,
+                                                            style: TextStyle(
+                                                                fontSize: 16,
+                                                                color:
+                                                                    passwordVisibility),
                                                           ),
                                                         ),
                                                         Expanded(
                                                           child: Container(
-                                                              margin: EdgeInsets.only(left: width * 0.02, right: width * 0.02),
+                                                              margin: EdgeInsets.only(
+                                                                  left: width *
+                                                                      0.02,
+                                                                  right: width *
+                                                                      0.02),
                                                               height: 100,
-                                                              width: width * 0.70,
-                                                              child: GestureDetector(
+                                                              width:
+                                                                  width * 0.70,
+                                                              child:
+                                                                  GestureDetector(
                                                                 onTap: () {
                                                                   Navigator.push(
                                                                       context,
@@ -663,66 +827,66 @@ class _LoginHomeState extends State<LoginHome> {
                                                                               PatientInformationScreen(id: todayappointmentsreq[index].id)));
                                                                 },
                                                                 child: Card(
-                                                                    shape: RoundedRectangleBorder(
-                                                                      borderRadius: BorderRadius.circular(15.0),
+                                                                    shape:
+                                                                        RoundedRectangleBorder(
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              15.0),
                                                                     ),
-                                                                    child: Column(children: <Widget>[
-                                                                      Container(
-                                                                        child: ListTile(
-                                                                          isThreeLine: true,
-                                                                          leading: SizedBox(
-                                                                            height: height * 0.20,
-                                                                            width: width * 0.15,
-                                                                            child: ClipRRect(
-                                                                              borderRadius: BorderRadius.circular(10),
-                                                                              child: Container(
-                                                                                  decoration: new BoxDecoration(
-                                                                                      image: new DecorationImage(
-                                                                                          fit: BoxFit.fitHeight,
-                                                                                          image: NetworkImage(todayappointmentsreq[index]
-                                                                                              .user!
-                                                                                              .fullImage!)))),
-                                                                            ),
-                                                                          ),
-                                                                          title: Container(
-                                                                            alignment: AlignmentDirectional.topStart,
-                                                                            margin: EdgeInsets.only(
-                                                                              top: height * 0.01,
-                                                                            ),
-                                                                            child: Text(todayappointmentsreq[index].patientName!,
-                                                                                style: TextStyle(fontSize: 16.0),overflow: TextOverflow.ellipsis),
-                                                                          ),
-                                                                          trailing: SharedPreferenceHelper.getString(Preferences.currency_symbol) != "N/A" ? Text(
-                                                                             SharedPreferenceHelper.getString(Preferences.currency_symbol) +
-                                                                            todayappointmentsreq[index].amount.toString(),
-                                                                            style: TextStyle(fontSize: 16, color: hintColor),
-                                                                          ) : Text(todayappointmentsreq[index].amount.toString(),
-                                                                            style: TextStyle(fontSize: 16, color: hintColor),
-                                                                          ),
-                                                                          subtitle: Column(
-                                                                            children: <Widget>[
-                                                                              Container(
-                                                                                  alignment: AlignmentDirectional.topStart,
-                                                                                  child: Text(
-                                                                                    getTranslated(context, home_age_data).toString() +
-                                                                                        ":" +
-                                                                                        todayappointmentsreq[index].age.toString(),
-                                                                                    style: TextStyle(fontSize: 12, color: hintColor),overflow: TextOverflow.ellipsis,
-                                                                                  )),
-                                                                              Container(
-                                                                                alignment: AlignmentDirectional.topStart,
-                                                                                child: Text(
-                                                                                  getTranslated(context, hospital_title).toString() + todayappointmentsreq[index].hospital!.name!,
-                                                                                  style: TextStyle(fontSize: 12, color: passwordVisibility),
-                                                                                  overflow: TextOverflow.ellipsis,
-                                                                                  maxLines: 2,
+                                                                    child: Column(
+                                                                        children: <
+                                                                            Widget>[
+                                                                          Container(
+                                                                            child:
+                                                                                ListTile(
+                                                                              isThreeLine: true,
+                                                                              leading: SizedBox(
+                                                                                height: height * 0.20,
+                                                                                width: width * 0.15,
+                                                                                child: ClipRRect(
+                                                                                  borderRadius: BorderRadius.circular(10),
+                                                                                  child: Container(decoration: new BoxDecoration(image: new DecorationImage(fit: BoxFit.fitHeight, image: NetworkImage(todayappointmentsreq[index].user!.fullImage!)))),
                                                                                 ),
                                                                               ),
-                                                                            ],
-                                                                          ),
-                                                                        ),
-                                                                      )
-                                                                    ])),
+                                                                              title: Container(
+                                                                                alignment: AlignmentDirectional.topStart,
+                                                                                margin: EdgeInsets.only(
+                                                                                  top: height * 0.01,
+                                                                                ),
+                                                                                child: Text(todayappointmentsreq[index].patientName!, style: TextStyle(fontSize: 16.0), overflow: TextOverflow.ellipsis),
+                                                                              ),
+                                                                              trailing: SharedPreferenceHelper.getString(Preferences.currency_symbol) != "N/A"
+                                                                                  ? Text(
+                                                                                      SharedPreferenceHelper.getString(Preferences.currency_symbol) + todayappointmentsreq[index].amount.toString(),
+                                                                                      style: TextStyle(fontSize: 16, color: hintColor),
+                                                                                    )
+                                                                                  : Text(
+                                                                                      todayappointmentsreq[index].amount.toString(),
+                                                                                      style: TextStyle(fontSize: 16, color: hintColor),
+                                                                                    ),
+                                                                              subtitle: Column(
+                                                                                children: <Widget>[
+                                                                                  Container(
+                                                                                      alignment: AlignmentDirectional.topStart,
+                                                                                      child: Text(
+                                                                                        getTranslated(context, home_age_data).toString() + ":" + todayappointmentsreq[index].age.toString(),
+                                                                                        style: TextStyle(fontSize: 12, color: hintColor),
+                                                                                        overflow: TextOverflow.ellipsis,
+                                                                                      )),
+                                                                                  Container(
+                                                                                    alignment: AlignmentDirectional.topStart,
+                                                                                    child: Text(
+                                                                                      getTranslated(context, hospital_title).toString() + todayappointmentsreq[index].hospital!.name!,
+                                                                                      style: TextStyle(fontSize: 12, color: passwordVisibility),
+                                                                                      overflow: TextOverflow.ellipsis,
+                                                                                      maxLines: 2,
+                                                                                    ),
+                                                                                  ),
+                                                                                ],
+                                                                              ),
+                                                                            ),
+                                                                          )
+                                                                        ])),
                                                               )),
                                                         ),
                                                       ],
@@ -750,7 +914,6 @@ class _LoginHomeState extends State<LoginHome> {
   }
 
   Future<BaseModel<TodaysAppointment>> todayappointmentsFunction() async {
-
     TodaysAppointment response;
 
     try {
@@ -805,7 +968,10 @@ class _LoginHomeState extends State<LoginHome> {
               Container(
                   child: Text(
                 getTranslated(context, home_subscription_deactive).toString(),
-                style: TextStyle(fontSize: 20, color: hintColor, decoration: TextDecoration.none),
+                style: TextStyle(
+                    fontSize: 20,
+                    color: hintColor,
+                    decoration: TextDecoration.none),
                 textAlign: TextAlign.center,
               )),
               GestureDetector(
@@ -815,8 +981,12 @@ class _LoginHomeState extends State<LoginHome> {
                 child: Container(
                     margin: EdgeInsets.only(top: height * 0.02),
                     child: Text(
-                      getTranslated(context, home_please_active_plan).toString(),
-                      style: TextStyle(fontSize: 14, color: darkGrey, decoration: TextDecoration.none),
+                      getTranslated(context, home_please_active_plan)
+                          .toString(),
+                      style: TextStyle(
+                          fontSize: 14,
+                          color: darkGrey,
+                          decoration: TextDecoration.none),
                       textAlign: TextAlign.center,
                     )),
               ),
@@ -826,8 +996,11 @@ class _LoginHomeState extends State<LoginHome> {
               Container(
                   margin: EdgeInsets.only(left: 12, right: 12),
                   child: ElevatedButton(
-                      onPressed: () => Navigator.pushReplacementNamed(context, "subscription"),
-                      child: Text(getTranslated(context, home_activate_subscription).toString())))
+                      onPressed: () => Navigator.pushReplacementNamed(
+                          context, "subscription"),
+                      child: Text(
+                          getTranslated(context, home_activate_subscription)
+                              .toString())))
             ],
           ),
         ),
@@ -862,12 +1035,13 @@ class _LoginHomeState extends State<LoginHome> {
         } else {
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => PhoneScreen(event.notification.additionalData)),
+            MaterialPageRoute(
+                builder: (context) =>
+                    PhoneScreen(event.notification.additionalData)),
           );
         }
       });
-    } catch (e) {
-    }
+    } catch (e) {}
   }
 
   showAlertDialog(BuildContext context) {
@@ -905,7 +1079,6 @@ class _LoginHomeState extends State<LoginHome> {
         return alert;
       },
     );
-
   }
 
   onSearchTextChanged(String text) async {
@@ -916,7 +1089,9 @@ class _LoginHomeState extends State<LoginHome> {
     }
 
     _todayUserAppointment.forEach((appointmentData) {
-      if (appointmentData.patientName!.toLowerCase().contains(text.toLowerCase())) _searchResult.add(appointmentData);
+      if (appointmentData.patientName!
+          .toLowerCase()
+          .contains(text.toLowerCase())) _searchResult.add(appointmentData);
     });
 
     setState(() {});

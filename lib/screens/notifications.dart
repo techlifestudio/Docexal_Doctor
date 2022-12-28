@@ -18,13 +18,11 @@ import 'package:intl/intl.dart';
 import '../chat/constants/colors.dart';
 
 class NotificationsScreen extends StatefulWidget {
-
   @override
   _NotificationsScreenState createState() => _NotificationsScreenState();
 }
 
 class _NotificationsScreenState extends State<NotificationsScreen> {
-
   //Set Drawer Open
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -89,19 +87,19 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
       dname = SharedPreferenceHelper.getString(Preferences.name);
       dfullimage = SharedPreferenceHelper.getString(Preferences.image);
       phone = SharedPreferenceHelper.getString(Preferences.phone_no);
-      subscription = SharedPreferenceHelper.getInt(Preferences.subscription_status);
+      subscription =
+          SharedPreferenceHelper.getInt(Preferences.subscription_status);
     });
   }
 
   @override
   Widget build(BuildContext context) {
-
     width = MediaQuery.of(context).size.width;
     height = MediaQuery.of(context).size.height;
 
     return Scaffold(
         key: _scaffoldKey,
-        drawer:  Drawer(
+        drawer: Drawer(
           child: Container(
             child: Column(
               children: [
@@ -115,16 +113,19 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                         Container(
                           width: 80,
                           height: 80,
-                          decoration: new BoxDecoration(shape: BoxShape.circle, boxShadow: [
-                            new BoxShadow(
-                              color: imageBorder,
-                              blurRadius: 1.0,
-                            ),
-                          ]),
+                          decoration: new BoxDecoration(
+                              shape: BoxShape.circle,
+                              boxShadow: [
+                                new BoxShadow(
+                                  color: imageBorder,
+                                  blurRadius: 1.0,
+                                ),
+                              ]),
                           child: CachedNetworkImage(
                             alignment: Alignment.center,
                             imageUrl: '$dfullimage',
-                            imageBuilder: (context, imageProvider) => CircleAvatar(
+                            imageBuilder: (context, imageProvider) =>
+                                CircleAvatar(
                               radius: 50,
                               backgroundColor: colorWhite,
                               child: CircleAvatar(
@@ -132,10 +133,12 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                                 backgroundImage: imageProvider,
                               ),
                             ),
-                            placeholder: (context, url) => CircularProgressIndicator(
+                            placeholder: (context, url) =>
+                                CircularProgressIndicator(
                               color: ColorConstants.themeColor,
                             ),
-                            errorWidget: (context, url, error) => Image.asset("assets/images/no_image.jpg"),
+                            errorWidget: (context, url, error) =>
+                                Image.asset("assets/images/no_image.jpg"),
                           ),
                         ),
                         Column(
@@ -148,12 +151,14 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                                 '$dname',
                                 overflow: TextOverflow.ellipsis,
                                 maxLines: 1,
-                                style: TextStyle(fontSize: 18, color: hintColor),
+                                style:
+                                    TextStyle(fontSize: 18, color: hintColor),
                               ),
                             ),
                             Text(
                               "$phone",
-                              style: TextStyle(fontSize: 14, color: passwordVisibility),
+                              style: TextStyle(
+                                  fontSize: 14, color: passwordVisibility),
                             ),
                           ],
                         ),
@@ -174,85 +179,149 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                   flex: 11,
                   child: subscription == -1
                       ? ListView.builder(
-                    physics: AlwaysScrollableScrollPhysics(),
-                    shrinkWrap: false,
-                    scrollDirection: Axis.vertical,
-                    itemCount: _drawerMenu.length,
-                    padding: EdgeInsets.zero,
-                    itemBuilder: (context, index) {
-                      return ListTile(
-                        onTap: () {
-                          if (_drawerMenu[index] == getTranslated(context, drawer_home).toString()) {
-                            Navigator.popAndPushNamed(context, "loginhome");
-                          } else if (_drawerMenu[index] == getTranslated(context, drawer_payments).toString()) {
-                            Navigator.popAndPushNamed(context, 'payment');
-                          } else if (_drawerMenu[index] == getTranslated(context, drawer_canceled_appointment).toString()) {
-                            Navigator.popAndPushNamed(context, 'cancelappoitment');
-                          } else if (_drawerMenu[index] == getTranslated(context, drawer_appointments).toString()) {
-                            Navigator.popAndPushNamed(context, 'AppointmentHistoryScreen');
-                          } else if (_drawerMenu[index] == getTranslated(context, drawer_review).toString()) {
-                            Navigator.popAndPushNamed(context, 'rateandreview');
-                          } else if (_drawerMenu[index] == getTranslated(context, drawer_notification).toString()) {
-                            Navigator.popAndPushNamed(context, 'notifications');
-                          } else if (_drawerMenu[index] == getTranslated(context, drawer_callHistory).toString()) {
-                            Navigator.popAndPushNamed(context, 'VideoCallHistory');
-                          } else if (_drawerMenu[index] == getTranslated(context, drawer_schedule_timing).toString()) {
-                            Navigator.popAndPushNamed(context, 'Schedule Timings');
-                          }else if (_drawerMenu[index] == getTranslated(context, drawer_setting).toString()) {
-                            Navigator.popAndPushNamed(context, 'Settings');
-                          } else if (_drawer[index] == getTranslated(context, chats).toString()) {
-                            Navigator.popAndPushNamed(context, 'ChatHome');
-                          } else if (_drawerMenu[index] == getTranslated(context, drawer_logout).toString()) {
-                            showAlertDialog(context);
-                          }
-                        },
-                        title: Text(
-                          _drawerMenu[index],
-                          style: TextStyle(color: hintColor),
-                        ),
-                      );
-                    },
-                  )
+                          physics: AlwaysScrollableScrollPhysics(),
+                          shrinkWrap: false,
+                          scrollDirection: Axis.vertical,
+                          itemCount: _drawerMenu.length,
+                          padding: EdgeInsets.zero,
+                          itemBuilder: (context, index) {
+                            return ListTile(
+                              onTap: () {
+                                if (_drawerMenu[index] ==
+                                    getTranslated(context, drawer_home)
+                                        .toString()) {
+                                  Navigator.popAndPushNamed(
+                                      context, "loginhome");
+                                } else if (_drawerMenu[index] ==
+                                    getTranslated(context, drawer_payments)
+                                        .toString()) {
+                                  Navigator.popAndPushNamed(context, 'payment');
+                                } else if (_drawerMenu[index] ==
+                                    getTranslated(context,
+                                            drawer_canceled_appointment)
+                                        .toString()) {
+                                  Navigator.popAndPushNamed(
+                                      context, 'cancelappoitment');
+                                } else if (_drawerMenu[index] ==
+                                    getTranslated(context, drawer_appointments)
+                                        .toString()) {
+                                  Navigator.popAndPushNamed(
+                                      context, 'AppointmentHistoryScreen');
+                                } else if (_drawerMenu[index] ==
+                                    getTranslated(context, drawer_review)
+                                        .toString()) {
+                                  Navigator.popAndPushNamed(
+                                      context, 'rateandreview');
+                                } else if (_drawerMenu[index] ==
+                                    getTranslated(context, drawer_notification)
+                                        .toString()) {
+                                  Navigator.popAndPushNamed(
+                                      context, 'notifications');
+                                } else if (_drawerMenu[index] ==
+                                    getTranslated(context, drawer_callHistory)
+                                        .toString()) {
+                                  Navigator.popAndPushNamed(
+                                      context, 'VideoCallHistory');
+                                } else if (_drawerMenu[index] ==
+                                    getTranslated(
+                                            context, drawer_schedule_timing)
+                                        .toString()) {
+                                  Navigator.popAndPushNamed(
+                                      context, 'Schedule Timings');
+                                } else if (_drawerMenu[index] ==
+                                    getTranslated(context, drawer_setting)
+                                        .toString()) {
+                                  Navigator.popAndPushNamed(
+                                      context, 'Settings');
+                                } else if (_drawer[index] ==
+                                    getTranslated(context, chats).toString()) {
+                                  Navigator.popAndPushNamed(
+                                      context, 'ChatHome');
+                                } else if (_drawerMenu[index] ==
+                                    getTranslated(context, drawer_logout)
+                                        .toString()) {
+                                  showAlertDialog(context);
+                                }
+                              },
+                              title: Text(
+                                _drawerMenu[index],
+                                style: TextStyle(color: hintColor),
+                              ),
+                            );
+                          },
+                        )
                       : ListView.builder(
-                    physics: AlwaysScrollableScrollPhysics(),
-                    shrinkWrap: false,
-                    scrollDirection: Axis.vertical,
-                    itemCount: _drawer.length,
-                    padding: EdgeInsets.zero,
-                    itemBuilder: (context, index) {
-                      return ListTile(
-                        onTap: () {
-                          if (_drawer[index] == getTranslated(context, drawer_home).toString()) {
-                            Navigator.popAndPushNamed(context, "loginhome");
-                          } else if (_drawer[index] == getTranslated(context, drawer_payments).toString()) {
-                            Navigator.popAndPushNamed(context, 'payment');
-                          } else if (_drawer[index] == getTranslated(context, drawer_canceled_appointment).toString()) {
-                            Navigator.popAndPushNamed(context, 'cancelappoitment');
-                          } else if (_drawer[index] == getTranslated(context, drawer_appointments).toString()) {
-                            Navigator.popAndPushNamed(context, 'AppointmentHistoryScreen');
-                          } else if (_drawer[index] == getTranslated(context, drawer_review).toString()) {
-                            Navigator.popAndPushNamed(context, 'rateandreview');
-                          } else if (_drawer[index] == getTranslated(context, drawer_notification).toString()) {
-                            Navigator.popAndPushNamed(context, 'notifications');
-                          } else if (_drawer[index] == getTranslated(context, drawer_callHistory).toString()) {
-                            Navigator.popAndPushNamed(context, 'VideoCallHistory');
-                          } else if (_drawer[index] == getTranslated(context, drawer_schedule_timing).toString()) {
-                            Navigator.popAndPushNamed(context, 'Schedule Timings');
-                          }else if (_drawer[index] == getTranslated(context, drawer_setting).toString()) {
-                            Navigator.popAndPushNamed(context, 'Settings');
-                          } else if (_drawer[index] == getTranslated(context, chats).toString()) {
-                            Navigator.popAndPushNamed(context, 'ChatHome');
-                          } else if (_drawer[index] == getTranslated(context, drawer_logout).toString()) {
-                            showAlertDialog(context);
-                          }
-                        },
-                        title: Text(
-                          _drawer[index],
-                          style: TextStyle(color: hintColor),
+                          physics: AlwaysScrollableScrollPhysics(),
+                          shrinkWrap: false,
+                          scrollDirection: Axis.vertical,
+                          itemCount: _drawer.length,
+                          padding: EdgeInsets.zero,
+                          itemBuilder: (context, index) {
+                            return ListTile(
+                              onTap: () {
+                                if (_drawer[index] ==
+                                    getTranslated(context, drawer_home)
+                                        .toString()) {
+                                  Navigator.popAndPushNamed(
+                                      context, "loginhome");
+                                } else if (_drawer[index] ==
+                                    getTranslated(context, drawer_payments)
+                                        .toString()) {
+                                  Navigator.popAndPushNamed(context, 'payment');
+                                } else if (_drawer[index] ==
+                                    getTranslated(context,
+                                            drawer_canceled_appointment)
+                                        .toString()) {
+                                  Navigator.popAndPushNamed(
+                                      context, 'cancelappoitment');
+                                } else if (_drawer[index] ==
+                                    getTranslated(context, drawer_appointments)
+                                        .toString()) {
+                                  Navigator.popAndPushNamed(
+                                      context, 'AppointmentHistoryScreen');
+                                } else if (_drawer[index] ==
+                                    getTranslated(context, drawer_review)
+                                        .toString()) {
+                                  Navigator.popAndPushNamed(
+                                      context, 'rateandreview');
+                                } else if (_drawer[index] ==
+                                    getTranslated(context, drawer_notification)
+                                        .toString()) {
+                                  Navigator.popAndPushNamed(
+                                      context, 'notifications');
+                                } else if (_drawer[index] ==
+                                    getTranslated(context, drawer_callHistory)
+                                        .toString()) {
+                                  Navigator.popAndPushNamed(
+                                      context, 'VideoCallHistory');
+                                } else if (_drawer[index] ==
+                                    getTranslated(
+                                            context, drawer_schedule_timing)
+                                        .toString()) {
+                                  Navigator.popAndPushNamed(
+                                      context, 'Schedule Timings');
+                                } else if (_drawer[index] ==
+                                    getTranslated(context, drawer_setting)
+                                        .toString()) {
+                                  Navigator.popAndPushNamed(
+                                      context, 'Settings');
+                                } else if (_drawer[index] ==
+                                    getTranslated(context, chats).toString()) {
+                                  Navigator.popAndPushNamed(
+                                      context, 'ChatHome');
+                                } else if (_drawer[index] ==
+                                    getTranslated(context, drawer_logout)
+                                        .toString()) {
+                                  showAlertDialog(context);
+                                }
+                              },
+                              title: Text(
+                                _drawer[index],
+                                style: TextStyle(color: hintColor),
+                              ),
+                            );
+                          },
                         ),
-                      );
-                    },
-                  ),
                 ),
               ],
             ),
@@ -264,7 +333,10 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                 top: true,
                 child: Column(children: [
                   Container(
-                    margin: EdgeInsets.only(left: width * 0.04, right: width * 0.04, top: height * 0.01),
+                    margin: EdgeInsets.only(
+                        left: width * 0.04,
+                        right: width * 0.04,
+                        top: height * 0.01),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -278,8 +350,10 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                         ),
                         Container(
                             child: Text(
-                          getTranslated(context, notification_heading).toString(),
-                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                          getTranslated(context, notification_heading)
+                              .toString(),
+                          style: TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.w600),
                           textAlign: TextAlign.center,
                         )),
                         Container(
@@ -302,7 +376,8 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                 ]))),
         body: WillPopScope(
           onWillPop: () {
-            Navigator.pushNamedAndRemoveUntil(context, 'loginhome', (route) => false);
+            Navigator.pushNamedAndRemoveUntil(
+                context, 'loginhome', (route) => false);
             return Future<bool>.value(false);
           },
           child: RefreshIndicator(
@@ -318,9 +393,23 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                       child: patientNotification.length == 0
                           ? Center(
                               child: Container(
-                                margin: EdgeInsets.only(top: height * 0.3),
+                                margin: EdgeInsets.only(top: height * 0.2),
                                 child: Container(
-                                  child: Image.asset("assets/images/no-data.png"),
+                                  child: Column(
+                                    children: [
+                                      Image.asset(
+                                        "assets/images/nonotification.png",
+                                        height: 250,
+                                      ),
+                                      Text(
+                                        'No Notification Yet',
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             )
@@ -329,13 +418,20 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                                 ListView.builder(
                                     physics: NeverScrollableScrollPhysics(),
                                     shrinkWrap: true,
-                                    itemCount: 6 < patientNotification.length ? 6 : patientNotification.length,
+                                    itemCount: 6 < patientNotification.length
+                                        ? 6
+                                        : patientNotification.length,
                                     itemBuilder: (context, index) {
-                                      String date = DateUtil().formattedDate(DateTime.parse(patientNotification[index].createdAt!));
+                                      String date = DateUtil().formattedDate(
+                                          DateTime.parse(
+                                              patientNotification[index]
+                                                  .createdAt!));
                                       return Column(
                                         children: [
                                           Container(
-                                              margin: EdgeInsets.only(left: width * 0.02, right: width * 0.02),
+                                              margin: EdgeInsets.only(
+                                                  left: width * 0.02,
+                                                  right: width * 0.02),
                                               width: width * 0.87,
                                               child: Column(children: <Widget>[
                                                 Container(
@@ -345,32 +441,54 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                                                       height: 70,
                                                       width: 60,
                                                       child: ClipRRect(
-                                                        borderRadius: BorderRadius.circular(10),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(10),
                                                         child: Container(
                                                             decoration: new BoxDecoration(
                                                                 image: new DecorationImage(
-                                                                    fit: BoxFit.fitHeight,
-                                                                    image: NetworkImage(patientNotification[index].user!.fullImage!)))),
+                                                                    fit: BoxFit
+                                                                        .fitHeight,
+                                                                    image: NetworkImage(patientNotification[
+                                                                            index]
+                                                                        .user!
+                                                                        .fullImage!)))),
                                                       ),
                                                     ),
                                                     title: Row(
-                                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
                                                       children: [
                                                         Container(
-                                                          child:
-                                                              Text(patientNotification[index].user!.name!, style: TextStyle(fontSize: 16.0)),
+                                                          child: Text(
+                                                              patientNotification[
+                                                                      index]
+                                                                  .user!
+                                                                  .name!,
+                                                              style: TextStyle(
+                                                                  fontSize:
+                                                                      16.0)),
                                                         ),
                                                         Container(
                                                             child: Text(
                                                           '$date',
-                                                          style: TextStyle(fontSize: 14, color: passwordVisibility),
+                                                          style: TextStyle(
+                                                              fontSize: 14,
+                                                              color:
+                                                                  passwordVisibility),
                                                         )),
                                                       ],
                                                     ),
                                                     subtitle: Container(
                                                       child: Text(
-                                                        patientNotification[index].message!,
-                                                        style: TextStyle(fontSize: 13, color: passwordVisibility),
+                                                        patientNotification[
+                                                                index]
+                                                            .message!,
+                                                        style: TextStyle(
+                                                            fontSize: 13,
+                                                            color:
+                                                                passwordVisibility),
                                                       ),
                                                     ),
                                                   ),
@@ -386,24 +504,38 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                                 patientNotification.length < 6
                                     ? Container()
                                     : GestureDetector(
-                                        onTap: () => Navigator.pushNamed(context, "ViewAllNotification"),
+                                        onTap: () => Navigator.pushNamed(
+                                            context, "ViewAllNotification"),
                                         child: Container(
-                                          margin: EdgeInsets.only(top: height * 0.02),
-                                          alignment: AlignmentDirectional.centerStart,
+                                          margin: EdgeInsets.only(
+                                              top: height * 0.02),
+                                          alignment:
+                                              AlignmentDirectional.centerStart,
                                           height: height * 0.07,
                                           width: width * 0.88,
                                           color: divider,
                                           child: Container(
-                                            margin: EdgeInsets.only(left: width * 0.02, right: width * 0.02),
+                                            margin: EdgeInsets.only(
+                                                left: width * 0.02,
+                                                right: width * 0.02),
                                             child: Row(
-                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
                                               children: [
                                                 Text(
-                                                  getTranslated(context, notification_view_all).toString(),
-                                                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: hintColor),
+                                                  getTranslated(context,
+                                                          notification_view_all)
+                                                      .toString(),
+                                                  style: TextStyle(
+                                                      fontSize: 16,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      color: hintColor),
                                                 ),
                                                 Container(
-                                                  margin: EdgeInsets.only(right: width * 0.4),
+                                                  margin: EdgeInsets.only(
+                                                      right: width * 0.4),
                                                   child: SvgPicture.asset(
                                                     'assets/icons/longarrow.svg',
                                                     height: height * 0.012,
@@ -411,7 +543,11 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                                                 ),
                                                 Text(
                                                   "${patientNotification.length}",
-                                                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: hintColor),
+                                                  style: TextStyle(
+                                                      fontSize: 16,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      color: hintColor),
                                                 ),
                                               ],
                                             ),
@@ -491,7 +627,10 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
 
   Future<void> logoutUser() async {
     SharedPreferenceHelper.clearPref();
-    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (BuildContext context) => SignIn()), ModalRoute.withName('SignIn'));
+    Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (BuildContext context) => SignIn()),
+        ModalRoute.withName('SignIn'));
   }
 }
 
