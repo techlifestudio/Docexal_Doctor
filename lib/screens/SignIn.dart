@@ -251,8 +251,8 @@ class _SignInState extends State<SignIn> {
                                         margin: EdgeInsets.symmetric(horizontal: 10),
                                         child: TextFormField(
                                           controller: password,
-                                          keyboardType: TextInputType.name,
-                                            inputFormatters:[FilteringTextInputFormatter.allow(RegExp('[a-zA-Z0-9]'))],
+                                          keyboardType: TextInputType.visiblePassword,
+                                            //inputFormatters:[FilteringTextInputFormatter.allow(RegExp('[a-zA-Z0-9]'))],
                                           style: TextStyle(fontSize: 16, color:hintColor),
                                           decoration: InputDecoration(
                                             border: InputBorder.none,
