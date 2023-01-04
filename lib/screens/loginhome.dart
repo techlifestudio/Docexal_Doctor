@@ -153,11 +153,10 @@ class _LoginHomeState extends State<LoginHome> {
       });
 
       Future.delayed(Duration(seconds: 5), () {
-        homeProvider.updateDataFirestore(FirestoreConstants.pathUserCollection,
-            FirebaseAuth.instance.currentUser!.uid, {
-          'pushToken':
-              SharedPreferenceHelper.getString(Preferences.messageToken)
-        });
+        if (FirebaseAuth.instance.currentUser!=null) {
+          homeProvider.updateDataFirestore(FirestoreConstants.pathUserCollection, FirebaseAuth.instance.currentUser!.uid,
+              {'pushToken': SharedPreferenceHelper.getString(Preferences.messageToken)});
+        }
       });
     });
 
