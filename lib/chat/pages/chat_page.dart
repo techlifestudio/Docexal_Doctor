@@ -490,9 +490,10 @@ class ChatPageState extends State<ChatPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: ColorConstants.primaryColor,
         title: Text(
           this.peerNickname,
-          style: const TextStyle(color: ColorConstants.primaryColor),
+          style: const TextStyle(color: Colors.white),
         ),
         centerTitle: true,
         leading: InkWell(
