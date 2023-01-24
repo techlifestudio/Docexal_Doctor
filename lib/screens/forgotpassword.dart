@@ -1,3 +1,4 @@
+import 'package:doctro/chat/constants/colors.dart';
 import 'package:doctro/model/ForgotPassword.dart';
 import 'package:doctro/retrofit/api_header.dart';
 import 'package:doctro/retrofit/base_model.dart';
@@ -123,6 +124,9 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                            left: width * 0.018, right: width * 0.018),
                       // alignment: Alignment.center,
                       child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          primary: ColorConstants.primaryColor
+                        ),
                         child: Text(
                           getTranslated(context, forgot_reset_button).toString(),
                           style: TextStyle(fontSize: width * 0.04),
